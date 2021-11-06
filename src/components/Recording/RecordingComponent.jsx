@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useEffect, useRef } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 
 export const RecordingComponent = () => {
@@ -14,7 +13,7 @@ export const RecordingComponent = () => {
     useEffect(() => {
         console.log(videoRef.current)
     }, [mediaBlobUrl])*/
-  const [blobUrl, setBlobUrl] = useState<any>(null)
+  const [blobUrl, setBlobUrl] = useState(null)
 
   return (
     <div>

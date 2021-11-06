@@ -18,6 +18,8 @@ const Layout = ({ children }: LayoutProps) => (
           <Nav.Link href='/recording'>Recording</Nav.Link>
           <Nav.Link href='/sign-in'>Log in</Nav.Link>
           <Nav.Link href='/sign-up'>Sign up</Nav.Link>
+          <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
+          <Nav.Link href='/choosing-room'>Join room</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
