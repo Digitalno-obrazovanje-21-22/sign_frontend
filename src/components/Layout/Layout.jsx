@@ -2,11 +2,7 @@ import React, { ReactChildren, ReactChild } from 'react'
 import { Container, Nav, Navbar, Button, Image } from 'react-bootstrap'
 const logo = require('../../assets/signsLogo.png')
 
-interface LayoutProps {
-  children: ReactChild | ReactChildren
-}
-
-const Layout = ({ children }: LayoutProps) => (
+const Layout = ({ children }) => (
   <div>
     <Navbar bg='dark' variant='dark'>
       <Container>
