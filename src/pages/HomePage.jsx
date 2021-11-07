@@ -2,6 +2,7 @@ import axios from 'axios';
 import StartingPageContent from '../components/StartingPage/StartingPageContent'
 import { baseUrl, urls } from '../utils/baseUrls';
 import React from 'react';
+import {Container} from "react-bootstrap";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,11 @@ class HomePage extends React.Component {
   }
 
   render(){
-    return(<StartingPageContent user={this.state.user} />)
+    return(
+      <Container style={{width:"50em"}} >
+         <StartingPageContent user={this.state.user} />
+      </Container>
+       )
   }
 
 }

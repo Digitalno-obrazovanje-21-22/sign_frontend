@@ -19,8 +19,8 @@ const Layout = ({ children }) => (
         </Nav>
       </Container>
     </Navbar>
-    <div className='auth-wrapper'>
-      <div className='auth-inner'>{children}</div>
+    <div >
+      <div>{children}</div>
     </div>
   </div>
 )

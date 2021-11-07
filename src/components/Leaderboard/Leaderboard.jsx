@@ -29,7 +29,7 @@ const Leaderboard = () => {
     }
 
     return(
-        <Table>
+        <Table variant="dark" striped bordered hover style={{width:"30em"}} responsive="true">
         <thead>
             <tr>
             <th>#</th>
