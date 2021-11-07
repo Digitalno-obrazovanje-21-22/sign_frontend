@@ -43,7 +43,7 @@ class ChoosingRoomPage extends React.Component {
 
     render() {
         return(
-            <Container style={{width:"45em"}}>
+            <Container style={{width:"50em", height:"auto", background:"rgb(128, 204, 255, 0.3)"}} className="justify-content-md-center">
                 <Row>
                     <Col><h3>Choose room</h3></Col>
                 </Row>

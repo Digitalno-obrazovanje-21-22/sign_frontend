@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import {Container, Button, Col} from "react-bootstrap";
+import {Container, Button, Col, Row} from "react-bootstrap";
 import { baseUrl, urls } from "../utils/baseUrls";
 
 class WaitingRoomPage extends React.Component {
@@ -24,13 +24,17 @@ class WaitingRoomPage extends React.Component {
 
     render () {
         return (
-            <Container style={{width:"40em"}}>
-                <Col>
-                    <h4>Waiting for other users to join..</h4>
-                </Col>
-                <Col>
-                    <Button  size="md" style={{float:"right"}}>Start game</Button>
-                </Col>
+            <Container style={{width:"40em", height:"20em",  background:"rgb(128, 204, 255, 0.3)"}}>
+                <Row>
+                    <Col>
+                        <h4>Waiting for other users to join..</h4>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Button  size="md" style={{float:"right"}}>Start game</Button>
+                    </Col>
+                </Row>         
             </Container>
         )
     }

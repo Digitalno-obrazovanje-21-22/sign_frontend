@@ -29,27 +29,27 @@ const Leaderboard = () => {
     }
 
     return(
-        <Table variant="dark" striped bordered hover style={{width:"30em"}} responsive="true">
-        <thead>
-            <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            {users.map((user, i) => {
-                return (
+            <Table variant="dark" striped bordered hover style={{width:"30em"}} responsive="true">
+                <thead>
                     <tr>
-                        <td>{i}</td>
-                        <td>{user.name}</td>
-                        <td>{user.score}</td>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Score</th>
                     </tr>
-            )})}
+                </thead>
+                <tbody>
+                    {users.map((user, i) => {
+                        return (
+                            <tr>
+                                <td>{i}</td>
+                                <td>{user.name}</td>
+                                <td>{user.score}</td>
+                            </tr>
+                    )})}
+                
+                </tbody>
         
-        </tbody>
-       
-        </Table>
+            </Table>
 )
 }
 

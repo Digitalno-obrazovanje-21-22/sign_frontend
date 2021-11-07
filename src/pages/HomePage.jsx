@@ -25,7 +25,7 @@ class HomePage extends React.Component {
 
   render(){
     return(
-      <Container style={{width:"50em"}} >
+      <Container className="justify-content-md-center" style={{width:"50em", height:"30em", background:"rgb(128, 204, 255, 0.3)"}} >
          <StartingPageContent user={this.state.user} />
       </Container>
        )
