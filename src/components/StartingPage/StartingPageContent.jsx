@@ -1,11 +1,21 @@
 import { Image } from 'react-bootstrap'
 import classes from './StartingPageContent.module.css'
 
-const StartingPageContent = () => {
+const StartingPageContent = ({user}) => {
+
   return (
-    <section className={classes.starting}>
-      <h1>Welcome to Signs!</h1>
-    </section>
+    <div>
+      <div>
+        <b>Username: </b>
+        <text>{user.name}</text><br />
+        <b>Score: </b>
+        <text>{user.score}</text>
+      </div>
+      <section className={classes.starting}>
+        <h1>Welcome to Signs!</h1>
+      </section>
+    </div>
+
   )
 }
 
