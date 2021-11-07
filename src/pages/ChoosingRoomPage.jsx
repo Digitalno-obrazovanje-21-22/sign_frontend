@@ -2,11 +2,13 @@ import React from "react";
 import { baseUrl, urls } from "../utils/baseUrls";
 import axios from "axios";
 import {Card, Button, Container, Row, Col} from "react-bootstrap";
+
 class ChoosingRoomPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            userId: null,
             rooms: [{id: 1, name:"room1", users:[{name:"Ivo"}, {name:"Marko"}, {name:"Ivo"}, {name:"Ivo"}, {name:"Ivo"}]}, {id:2, name:"room2", users:[{name:"Ivo"}]}, {id: 3, name:"room3", users:[]},]
         };
     }
@@ -23,6 +25,22 @@ class ChoosingRoomPage extends React.Component {
           })
     }
 
+    joinRoom = () => {
+        console.log("Sending req to BE")
+        axios.post( `${baseUrl + "/" + urls.joinRoomUrl.replace(":userId", this.state.userId)}`)
+            .then(response => {
+                console.log(response);
+                this.setState({rooms: response.data})
+            })
+    }
+
+    createRoom = () => {
+        axios.post(baseUrl + "/" + urls.roomUrl)
+            .then(response => {
+                console.log(response)
+            })
+    }
+
     render() {
         return(
             <Container style={{width:"45em"}}>
@@ -31,7 +49,9 @@ class ChoosingRoomPage extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Button size="md" style={{float:"right"}}>Create room</Button>
+                        <Button onClick={() => this.createRoom()} href="/waiting-room" size="md" style={{float:"right"}}>
+                                Create room
+                        </Button>
                     </Col>
                 </Row>    
                 <Row>
@@ -41,7 +61,7 @@ class ChoosingRoomPage extends React.Component {
                                 <Card.Body>
                                     <Card.Title>{room.name}</Card.Title>
                                     <Card.Text>Number of joined users: {room.users.length}/5</Card.Text>
-                                    <Button variant="primary" disabled={room.users.length >= 5 ? true : false}>Join</Button>
+                                    <Button variant="primary" onClick={() => this.joinRoom()} href="/waiting-room"  disabled={room.users.length >= 5 ? true : false}>Join</Button>
                                 </Card.Body>
                             </Card>
                         )

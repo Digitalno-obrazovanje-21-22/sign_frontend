@@ -5,8 +5,8 @@ import HomePage from './HomePage'
 import LeaderboardPage from './LeaderboardPage'
 import LoginPage from './LoginPage'
 import RecordingPage from './RecordingPage'
-
 import SignUpPage from './SignUpPage'
+import WaitingRoomPage from './WaitingRoomPage'
 
 export const AuthRouter = () => {
   //Find authentiacation status
@@ -22,6 +22,7 @@ export const AuthRouter = () => {
           <Route path='/sign-up' component={SignUpPage} />
           <Route path='/leaderboard' component={LeaderboardPage} />
           <Route path='/choosing-room' component={ChoosingRoomPage} />
+          <Route path='/waiting-room' component={WaitingRoomPage} />
           <Redirect to={'/'} />
         </Switch>
       </Layout>
