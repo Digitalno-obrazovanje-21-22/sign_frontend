@@ -1,18 +1,47 @@
-import React, { Component } from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { baseUrl, urls } from '../../utils/baseUrls'
+import {Button} from "react-bootstrap";
+import { couldStartTrivia } from 'typescript';
 
-const LoginComponent = () => {
+const LoginComponent = ({userId}) => {
+
+  const [ email, setEmail ] = useState();
+  const [ password, setPassword] = useState();
+
+  const signIn = () => {
+    console.log("send data to be")
+    axios.post(baseUrl + "/" + urls.userSignInUrl, {
+      email: email,
+      password: password
+    })
+      .then(response => {
+        console.log(response);
+      })
+  }
+
+  const setEmailValue = (value) => {
+      console.log(value);
+      setEmail({value});
+      console.log(email)
+  }
+  const setPasswordValue = async (value) => {
+      console.log(value);
+      setPassword({value});
+      console.log(password)
+  }
   return (
-    <form>
+    <form className="justify-content-md-center" style={{width:"25em"}}>
       <h3>Sign In</h3>
 
       <div className='form-group'>
         <label>Email address</label>
-        <input type='email' className='form-control' placeholder='Enter email' />
+        <input type='email' className='form-control' placeholder='Enter email' onChange={(event) => setEmailValue(event.target.value)} />
       </div>
 
       <div className='form-group'>
         <label>Password</label>
-        <input type='password' className='form-control' placeholder='Enter password' />
+        <input type='password' className='form-control' placeholder='Enter password' onChange={(event) => setPasswordValue(event.target.value)}/>
       </div>
 
       <div className='form-group'>
@@ -24,9 +53,9 @@ const LoginComponent = () => {
         </div>
       </div>
 
-      <button type='submit' className='btn btn-primary btn-block'>
+      <Button type='submit' href="/home-page" onClick={() => signIn()}>
         Submit
-      </button>
+      </Button>
       <p className='forgot-password text-right'>
         Forgot <a href='#'>password?</a>
       </p>

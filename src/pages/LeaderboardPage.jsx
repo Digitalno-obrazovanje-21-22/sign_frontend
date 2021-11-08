@@ -11,19 +11,19 @@ class LeaderboardPage extends React.Component {
 
     render() {
         return (
-            <Container className="justify-content-md-center" style={{ width:"50em", height:"30em", marginBottom:"5em", background:"rgb(128, 204, 255, 0.3)"}}>
+            <Container style={{ width:"55em", height:"30em", paddingTop:"1em", paddingLeft:"2em", paddingRight:"2em", paddingBottom:"2em", background:"rgb(128, 204, 255, 0.3)"}}  className="justify-content-md-center" >
                 <br />
-                <Row>
+                <Row >
                     <Col>
-                        <h2>Leaderboard</h2>
-                    </Col>
-                    <Col >
-                        <Button  style={{float:"right"}}>
+                        <div style={{textAlign:"center"}}>
+                            <h2>Leaderboard</h2>
+                        </div>
+                        <Button  style={{float:"right"}} size="md" href="/home-page">
                             Home page
                         </Button>
                     </Col>
-                 </Row>
-                <Row >  
+                </Row>
+                <Row  style={{textAlign:"center", marginLeft:"8em"}} >  
                     <Leaderboard users={this.state.users}></Leaderboard>
                 </Row>
             </Container>

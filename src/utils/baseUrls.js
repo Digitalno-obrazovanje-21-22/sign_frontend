@@ -1,8 +1,10 @@
 export const baseUrl = "http://localhost:8080";
 
 export const urls = {
+    userSignInUrl: "user/sign-in",
+    userSignUpUrl: "user/sign-up",
     userUrl: "user",
     videoUrl: "video",
     roomUrl: "room",
-    joinRoomUrl: "room/join/:userId",
+    joinRoomUrl: "room/:roomId/join/:userId",
 };

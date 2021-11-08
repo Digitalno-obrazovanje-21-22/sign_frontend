@@ -9,7 +9,7 @@ class ChoosingRoomPage extends React.Component {
         super(props);
         this.state = {
             userId: null,
-            rooms: [{id: 1, name:"room1", users:[{name:"Ivo"}, {name:"Marko"}, {name:"Ivo"}, {name:"Ivo"}, {name:"Ivo"}]}, {id:2, name:"room2", users:[{name:"Ivo"}]}, {id: 3, name:"room3", users:[]},]
+            rooms: [{id: 1, name:"room1", users:[{name:"Ivo"}, {name:"Marko"}, {name:"Ivo"}, {name:"Ivo"}, {name:"Ivo"}]}, {id:2, name:"room2", users:[{name:"Ivo"}]}, {id: 3, name:"room3", users:[]}, {id: 4, name:"room4", users:[]}]
         };
     }
 
@@ -26,7 +26,6 @@ class ChoosingRoomPage extends React.Component {
     }
 
     joinRoom = () => {
-        console.log("Sending req to BE")
         axios.post( `${baseUrl + "/" + urls.joinRoomUrl.replace(":userId", this.state.userId)}`)
             .then(response => {
                 console.log(response);
@@ -35,7 +34,7 @@ class ChoosingRoomPage extends React.Component {
     }
 
     createRoom = () => {
-        axios.post(baseUrl + "/" + urls.roomUrl)
+        axios.post(baseUrl + "/" + urls.roomUrl + "/" + this.state.userId)
             .then(response => {
                 console.log(response)
             })
@@ -43,9 +42,9 @@ class ChoosingRoomPage extends React.Component {
 
     render() {
         return(
-            <Container style={{width:"50em", height:"auto", background:"rgb(128, 204, 255, 0.3)"}} className="justify-content-md-center">
+            <Container style={{width:"55em", paddingTop:"1em", paddingBottom:"2em", background:"rgb(128, 204, 255, 0.3)"}} className="justify-content-md-center">
                 <Row>
-                    <Col><h3>Choose room</h3></Col>
+                    <Col style={{textAlign:"center"}}><h3>Choose room</h3></Col>
                 </Row>
                 <Row>
                     <Col>
