@@ -24,6 +24,22 @@ const StartingPageContent = ({ user }) => {
   {
     url:"https://media.spreadthesign.com/video/mp4/13/153329.mp4",
     name: "Dobro"
+  },
+  {
+    url:"https://media.spreadthesign.com/video/mp4/13/93725.mp4",
+    name: "Mogu li ti pomoći?"
+  },
+  {
+    url:"https://media.spreadthesign.com/video/mp4/13/51106.mp4",
+    name: "Da"
+  },
+  {
+    url:"https://media.spreadthesign.com/video/mp4/13/457104.mp4",
+    name: "Ne"
+  },
+  {
+    url: "https://media.spreadthesign.com/video/mp4/13/91239.mp4",
+    name: "Gdje je WC?"
   }
 ]);
 
