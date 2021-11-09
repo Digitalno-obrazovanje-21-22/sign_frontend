@@ -1,12 +1,27 @@
 import React from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import {Container, Row, Col, Button} from "react-bootstrap";
+import {baseUrl, urls} from "../utils/baseUrls";
+import axios from "axios";
 class LeaderboardPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             users: []
         };
+    }
+
+    componentDidMount() {
+        this.getUsers();
+    }
+
+    getUsers = () => {
+        axios.get(baseUrl + "/" + urls.userUrl).then((response) => {
+            console.log("dataaa")
+            console.log(response);
+            const data = response.data;
+            this.setState({users: data})
+        })
     }
 
     render() {

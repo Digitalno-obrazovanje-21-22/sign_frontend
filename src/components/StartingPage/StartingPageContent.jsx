@@ -50,7 +50,7 @@ const StartingPageContent = ({ user }) => {
       <Container>
         <div>
           <b>Username: </b>
-          <text>{user.name}</text><br />
+          <text>{user.firstName} {user.lastName}</text><br />
           <b>Score: </b>
           <text>{user.score}</text>
         </div>

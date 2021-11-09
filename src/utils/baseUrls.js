@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:8080";
+export const baseUrl = "http://localhost:3001";
 
 export const urls = {
     userSignInUrl: "user/sign-in",

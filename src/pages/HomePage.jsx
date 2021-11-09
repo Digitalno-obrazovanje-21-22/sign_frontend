@@ -7,12 +7,12 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        user: { name: "Ivo Ivić", score: 2540}
+        user: {}
     };
   }
 
   fetchUserData = () => {
-    axios.get(baseUrl + "/" + urls.userUrl)
+    axios.get(baseUrl + "/" + urls.userUrl + "/" + 1)
       .then(response => {
         console.log(response);
         this.setState({user: response.data})

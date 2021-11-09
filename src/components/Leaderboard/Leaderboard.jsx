@@ -1,32 +1,7 @@
-import { render } from "@testing-library/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+
 import {Table} from "react-bootstrap";
-import { baseUrl, urls } from "../../utils/baseUrls";
 
-const Leaderboard = () => {
-
-    const [users, setUsers] = useState([
-        {
-            name:"User1", score: 250
-        },
-        {
-            name:"User2", score: 230
-        },
-        {
-            name:"User5", score: 100
-        }
-    ]);
-
-    useEffect(() => getUsers(), []);
-
-    const getUsers = () => {
-        axios.get(baseUrl + "/" + urls.userUrl).then((response) => {
-            console.log(response);
-            const data = response.data;
-            setUsers(data);
-        })
-    }
+const Leaderboard = ({users}) => {
 
     return(
             <Table variant="dark" striped bordered hover style={{width:"30em"}} responsive="true">
@@ -42,7 +17,7 @@ const Leaderboard = () => {
                         return (
                             <tr>
                                 <td>{i}</td>
-                                <td>{user.name}</td>
+                                <td>{user.firstName} {user.lastName}</td>
                                 <td>{user.score}</td>
                             </tr>
                     )})}
