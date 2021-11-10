@@ -6,5 +6,5 @@ export const urls = {
     userUrl: "user",
     videoUrl: "video",
     roomUrl: "room",
-    joinRoomUrl: "room-participant/:roomId/:userId",
+    roomParticipantUrl: "room-participant"
 };
