@@ -1,10 +1,10 @@
 export const baseUrl = "http://localhost:3001";
 
 export const urls = {
-    userSignInUrl: "user/sign-in",
-    userSignUpUrl: "user/sign-up",
+    signInUrl: "auth/signin",
+    signUpUrl: "auth/signup",
     userUrl: "user",
     videoUrl: "video",
     roomUrl: "room",
-    joinRoomUrl: "room/:roomId/join/:userId",
+    joinRoomUrl: "room-participant/:roomId/:userId",
 };

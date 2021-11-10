@@ -8,8 +8,8 @@ class ChoosingRoomPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: null,
-            rooms: [{id: 1, name:"room1", users:[{name:"Ivo"}, {name:"Marko"}, {name:"Ivo"}, {name:"Ivo"}, {name:"Ivo"}]}, {id:2, name:"room2", users:[{name:"Ivo"}]}, {id: 3, name:"room3", users:[]}, {id: 4, name:"room4", users:[]}]
+            userId: 1,
+            rooms: []
         };
     }
 
@@ -25,18 +25,21 @@ class ChoosingRoomPage extends React.Component {
           })
     }
 
-    joinRoom = () => {
-        axios.post( `${baseUrl + "/" + urls.joinRoomUrl.replace(":userId", this.state.userId)}`)
+    joinRoom = (roomId) => {
+        axios.post( `${baseUrl + "/" + urls.joinRoomUrl.replace(":userId", this.state.userId).replace(":roomId", roomId)}`)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
                 this.setState({rooms: response.data})
             })
     }
 
     createRoom = () => {
-        axios.post(baseUrl + "/" + urls.roomUrl + "/" + this.state.userId)
+        axios.post(baseUrl + "/" + urls.roomUrl)
             .then(response => {
-                console.log(response)
+                console.log(response.data)
+                this.setState({
+                    rooms: [...this.state.rooms, response.data]
+                })
             })
     }
 
@@ -56,11 +59,11 @@ class ChoosingRoomPage extends React.Component {
                 <Row>
                     {this.state.rooms.map((room,i) => {
                         return (
-                            <Card style={{ width: '15rem', marginLeft:"2em", marginTop:"2em", marinRight:"2em", backgroundColor:room.users.length < 5 ? "rgb(128, 204, 255, 0.3)" : "rgb(128, 204, 255)" }}>
+                            <Card style={{ width: '15rem', marginLeft:"2em", marginTop:"2em", marinRight:"2em", backgroundColor:"rgb(128, 204, 255, 0.5)" }}>
                                 <Card.Body>
                                     <Card.Title>{room.name}</Card.Title>
-                                    <Card.Text>Number of joined users: {room.users.length}/5</Card.Text>
-                                    <Button variant="primary" onClick={() => this.joinRoom()} href="/waiting-room"  disabled={room.users.length >= 5 ? true : false}>Join</Button>
+                                    <Card.Text>Number of joined users: 0/5</Card.Text>
+                                    <Button id={room.id} variant="primary" onClick={(event) => this.joinRoom()} href="/waiting-room"  disabled={false}>Join</Button>
                                 </Card.Body>
                             </Card>
                         )
