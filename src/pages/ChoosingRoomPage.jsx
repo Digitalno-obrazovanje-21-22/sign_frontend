@@ -46,8 +46,7 @@ class ChoosingRoomPage extends React.Component {
             config: config
         }).then(response => {
             const newParticipant = response.data;
-            console.log(newParticipant);
-            //TODO: save response to state
+            console.log(newParticipant)
         }
         );
     }
@@ -79,11 +78,11 @@ class ChoosingRoomPage extends React.Component {
                 <Row>
                     {this.state.rooms.map((room, i) => {
                         return (
-                            <Card style={{ width: '15rem', marginLeft: "2em", marginTop: "2em", marinRight: "2em", backgroundColor: room.roomParticipants.length < 5 ? "rgb(128, 204, 255, 0.3)" : "rgb(128, 204, 255)" }}>
+                            <Card style={{ width: '15em', marginLeft: "2em", marginTop: "2em", marinRight: "2em", backgroundColor: room.roomParticipants.length < 5 ? "rgb(128, 204, 255, 0.3)" : "rgb(128, 204, 255)" }}>
                                 <Card.Body>
                                     <Card.Title>{room.name}</Card.Title>
                                     <Card.Text>Number of joined users: {room.roomParticipants.length}/5</Card.Text>
-                                    <Button value={room.id} variant="primary" onClick={(event) => this.joinRoom(event.target.value)} disabled={room.roomParticipants.length >= 5}>Join</Button>
+                                    <Button href="/waiting-room" variant="primary" onClick={() => this.joinRoom(room.id)} disabled={room.roomParticipants.length >= 5}>Join</Button>
                                 </Card.Body>
                             </Card>
                         )

@@ -37,7 +37,7 @@ class RecordingPage extends React.Component {
 
   render() {
     return (
-      <Container style={{ width: "70em", paddingTop: "1em", height: "40em", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
+      <Container style={{ width: "100%", paddingTop: "1em", height: "40em", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
         <Row>
           <Alert variant={this.state.alertVariant} style={{textAlign:"center"}}>
           {this.state.alertText}

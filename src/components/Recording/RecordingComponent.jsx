@@ -3,18 +3,7 @@ import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 import { Container, Row, Col } from "react-bootstrap";
 import VideoPreview from './VideoPreviw';
 export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
-  /*const videoRef = useRef<HTMLVideoElement>(null);
-    const {
-        status,
-        startRecording,
-        stopRecording,
-        mediaBlobUrl,
-    } = useReactMediaRecorder({ video: true });
 
-    useEffect(() => {
-        console.log(videoRef.current)
-    }, [mediaBlobUrl])*/
-  const [blobUrl, setBlobUrl] = useState(null)
   const {
     status,
     startRecording,
@@ -35,22 +24,17 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
     }
   }, [recordingStopped])
 
-
-
   return (
     <Container>
-      <a href={blobUrl} download='apple'>
+      <a href={mediaBlobUrl} download='video_record'>
+        Download
       </a>
       <ReactMediaRecorder
         video
-        onStop={(blobUrl, blob) => {
-          setBlobUrl(blobUrl)
-        }}
-        render={({ }) => (
+        render={() => (
           <Container>
-            <Row content="flex">
+            <Row>
               <VideoPreview stream={previewStream} />
-              <br />
             </Row>
           </Container>
         )

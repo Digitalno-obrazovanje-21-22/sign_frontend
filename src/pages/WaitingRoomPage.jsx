@@ -24,7 +24,7 @@ class WaitingRoomPage extends React.Component {
 
     render () {
         return (
-            <Container style={{width:"40em", height:"20em",  background:"rgb(128, 204, 255, 0.3)"}}>
+            <Container style={{width:"55em", height:"auto", minHeight:"30em", background:"rgb(128, 204, 255, 0.3)"}}>
                 <Row>
                     <Col>
                         <h4>Waiting for other users to join..</h4>
