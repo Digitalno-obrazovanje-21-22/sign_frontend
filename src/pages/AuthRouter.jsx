@@ -23,6 +23,7 @@ export const AuthRouter = () => {
           <Route path='/leaderboard' component={LeaderboardPage} />
           <Route path='/choosing-room' component={ChoosingRoomPage} />
           <Route path='/waiting-room' component={WaitingRoomPage} />
+          <Route path='/recording-page' component={RecordingPage} />
           <Redirect to={'/'} />
         </Switch>
       </Layout>

@@ -11,7 +11,6 @@ const Layout = ({ children }) => (
         </Navbar.Brand>
         <Nav className='me-auto'>
           <Nav.Link href='/'>Home</Nav.Link>
-          <Nav.Link href='/recording'>Recording</Nav.Link>
           <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
           <Nav.Link href='/choosing-room'>Join room</Nav.Link>
           <Nav.Link href='/sign-in' style={{paddingLeft:"45em"}}>Log in</Nav.Link>

@@ -32,7 +32,7 @@ class WaitingRoomPage extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Button  size="md" style={{float:"right"}}>Start game</Button>
+                        <Button  size="md" style={{float:"right"}} href="/recording-page">Start game</Button>
                     </Col>
                 </Row>         
             </Container>

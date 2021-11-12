@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
-
+import { Container, Row, Col } from "react-bootstrap";
 export const RecordingComponent = () => {
   /*const videoRef = useRef<HTMLVideoElement>(null);
     const {
@@ -26,18 +26,28 @@ export const RecordingComponent = () => {
           setBlobUrl(blobUrl)
         }}
         render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
-          <div>
-            <p>{status}</p>
-            <video src={mediaBlobUrl || undefined} controls autoPlay loop />
-            <button onClick={startRecording} className='btn btn-primary btn-block'>
-              Start Recording
-            </button>
-            <button onClick={stopRecording} className='btn btn-secondary btn-block '>
-              Stop Recording
-            </button>
-          </div>
-        )}
+          <Container>
+            <Row content="flex">
+              <p>{status}</p>
+              <video src={mediaBlobUrl || undefined} controls autoPlay loop playsInline muted/>
+              <br />
+            </Row>
+            <Row>
+              <Col>
+                <div class="float-end">
+                  <button onClick={startRecording} className='btn btn-primary btn-block float-right'>
+                    Start Recording
+                  </button>
+                  <button onClick={stopRecording} className='btn btn-secondary btn-block float-right' style={{ marginRight: "2em" }}>
+                    Stop Recording
+                  </button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        )
+        }
       />
-    </div>
+    </div >
   )
 }
