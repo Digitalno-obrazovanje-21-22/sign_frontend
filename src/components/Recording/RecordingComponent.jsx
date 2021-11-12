@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 import { Container, Row, Col } from "react-bootstrap";
-export const RecordingComponent = () => {
+import VideoPreview from './VideoPreviw';
+export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
   /*const videoRef = useRef<HTMLVideoElement>(null);
     const {
         status,
@@ -14,40 +15,47 @@ export const RecordingComponent = () => {
         console.log(videoRef.current)
     }, [mediaBlobUrl])*/
   const [blobUrl, setBlobUrl] = useState(null)
+  const {
+    status,
+    startRecording,
+    stopRecording,
+    mediaBlobUrl,
+    previewStream
+  } = useReactMediaRecorder({ video: true });
+
+  useEffect(() => {
+    if (recordingStarted) {
+      startRecording();
+    }
+  }, [recordingStarted])
+
+  useEffect(() => {
+    if (recordingStopped) {
+      stopRecording();
+    }
+  }, [recordingStopped])
+
+
 
   return (
-    <div>
+    <Container>
       <a href={blobUrl} download='apple'>
-        hello there
       </a>
       <ReactMediaRecorder
         video
         onStop={(blobUrl, blob) => {
           setBlobUrl(blobUrl)
         }}
-        render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
+        render={({ }) => (
           <Container>
             <Row content="flex">
-              <p>{status}</p>
-              <video src={mediaBlobUrl || undefined} controls autoPlay loop playsInline muted/>
+              <VideoPreview stream={previewStream} />
               <br />
-            </Row>
-            <Row>
-              <Col>
-                <div class="float-end">
-                  <button onClick={startRecording} className='btn btn-primary btn-block float-right'>
-                    Start Recording
-                  </button>
-                  <button onClick={stopRecording} className='btn btn-secondary btn-block float-right' style={{ marginRight: "2em" }}>
-                    Stop Recording
-                  </button>
-                </div>
-              </Col>
             </Row>
           </Container>
         )
         }
       />
-    </div >
+    </Container >
   )
 }

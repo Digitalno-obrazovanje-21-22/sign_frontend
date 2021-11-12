@@ -2,7 +2,7 @@ import { Image } from 'react-bootstrap'
 import classes from './StartingPageContent.module.css'
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from 'react';
-import VideoComponent from '../Video/VideoComponent';
+import VideoComponent from '../Recording/VideoComponent';
 
 const StartingPageContent = ({ user }) => {
 
