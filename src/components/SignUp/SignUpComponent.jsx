@@ -1,47 +1,45 @@
-import React, { Component, useState } from 'react'
-import {Button} from "react-bootstrap";
-import { baseUrl, urls } from '../../utils/baseUrls';
+import React, { Component, useContext, useRef, useState } from 'react'
+import { Button } from 'react-bootstrap'
+import { baseUrl, urls } from '../../utils/baseUrls'
 import axios from 'axios'
-export const SignUpComponent = () => {
+import { convertTypeAcquisitionFromJson } from 'typescript'
+import { useHistory } from 'react-router-dom'
+import AuthContext from '../../store/auth-context'
 
-  let [ firstName, setFirstName ] = useState();
-  let [ lastName, setLastName ] = useState();
-  let [ email, setEmail ] = useState();
-  let [ password, setPassword] = useState();
+const SignUpComponent = () => {
+  const history = useHistory()
+  const authCtx = useContext(AuthContext)
 
+  const firstNameInputRef = useRef()
+  const lastNameInputRef = useRef()
+  const emailInputRef = useRef()
+  const passwordInputRef = useRef()
+  const [isLoading, setIsLoading] = useState(false)
 
   const signUp = () => {
-    console.log("send data to be")
-    axios.post(baseUrl + "/" + urls.userSignUpUrl,{
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password
-    })
-      .then(response => {
-        console.log(response);
-      })
-  }
+    setIsLoading(true)
 
-  const setFirstNameValue = (value) => {
-    console.log(value);
-    setFirstName({value});
-    console.log(firstName)
-}
-  const setLastNameValue = async (value) => {
-      console.log(value);
-      setLastName({value});
-      console.log(lastName)
-  }
-  const setEmailValue = (value) => {
-    console.log(value);
-    setEmail({value});
-    console.log(email)
-  }
-  const setPasswordValue = async (value) => {
-      console.log(value);
-      setPassword({value});
-      console.log(password)
+    const dataToSubmit = {
+      firstName: firstNameInputRef.current.value,
+      lastName: lastNameInputRef.current.value,
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+    }
+
+    axios
+      .post(baseUrl + urls.signUpUrl, dataToSubmit)
+      .then((response) => {
+        const token = response.data.token
+        authCtx.login(token)
+        history.replace('/')
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.message
+        alert(errorMessage)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -50,27 +48,26 @@ export const SignUpComponent = () => {
 
       <div className='form-group'>
         <label>First name</label>
-        <input type='text' className='form-control' placeholder='First name' onChange={event => setFirstNameValue(event.target.value)} />
+        <input type='text' className='form-control' ref={firstNameInputRef} placeholder='First name' />
       </div>
 
       <div className='form-group'>
         <label>Last name</label>
-        <input type='text' className='form-control' placeholder='Last name' onChange={event => setLastNameValue(event.target.value)} />
+        <input type='text' className='form-control' ref={lastNameInputRef} placeholder='Last name' />
       </div>
 
       <div className='form-group'>
         <label>Email address</label>
-        <input type='email' className='form-control' placeholder='Enter email' onChange={event => setEmailValue(event.target.value)} />
+        <input type='email' className='form-control' ref={emailInputRef} placeholder='Enter email' />
       </div>
 
       <div className='form-group'>
         <label>Password</label>
-        <input type='password' className='form-control' placeholder='Enter password' onChange={event => setPasswordValue(event.target.value)}/>
+        <input type='password' className='form-control' ref={passwordInputRef} placeholder='Enter password' />
       </div>
 
-      <Button type='submit'  href="/home-page" onClick={() => signUp()}>
-        Sign Up
-      </Button>
+      {!isLoading && <Button onClick={() => signUp()}>Sign Up</Button>}
+      {isLoading && <p>Loading...</p>}
       <p className='forgot-password text-right'>
         Already registered <a href='/sign-in'>sign in?</a>
       </p>

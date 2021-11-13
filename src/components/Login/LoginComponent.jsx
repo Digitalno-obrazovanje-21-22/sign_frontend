@@ -1,47 +1,58 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { baseUrl, urls } from '../../utils/baseUrls'
-import {Button} from "react-bootstrap";
-import { couldStartTrivia } from 'typescript';
+import { Button } from 'react-bootstrap'
+import AuthContext from '../../store/auth-context'
+import { useHistory } from 'react-router-dom'
 
-const LoginComponent = ({userId}) => {
+const LoginComponent = () => {
+  const history = useHistory()
+  const emailInputRef = useRef()
+  const passwordInputRef = useRef()
 
-  const [ email, setEmail ] = useState();
-  const [ password, setPassword] = useState();
+  const [isLoading, setIsLoading] = useState(false)
+
+  const authCtx = useContext(AuthContext)
 
   const signIn = () => {
-    console.log("send data to be")
-    axios.post(baseUrl + "/" + urls.userSignInUrl, {
-      email: email,
-      password: password
-    })
-      .then(response => {
-        console.log(response);
+    setIsLoading(true)
+
+    const dataToSubmit = {
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+    }
+
+    axios
+      .post(baseUrl + urls.signInUrl, dataToSubmit)
+      .then((response) => {
+        if (response) {
+          const token = response.data.token
+          authCtx.login(token)
+          history.replace('/')
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        const errorMessage = error.response.data.message
+        alert(errorMessage)
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
-  const setEmailValue = (value) => {
-      console.log(value);
-      setEmail({value});
-      console.log(email)
-  }
-  const setPasswordValue = async (value) => {
-      console.log(value);
-      setPassword({value});
-      console.log(password)
-  }
   return (
-    <form className="justify-content-md-center" style={{width:"25em"}}>
+    <form className='justify-content-md-center' style={{ width: '25em' }}>
       <h3>Sign In</h3>
 
       <div className='form-group'>
         <label>Email address</label>
-        <input type='email' className='form-control' placeholder='Enter email' onChange={(event) => setEmailValue(event.target.value)} />
+        <input type='email' ref={emailInputRef} className='form-control' placeholder='Enter email' />
       </div>
 
       <div className='form-group'>
         <label>Password</label>
-        <input type='password' className='form-control' placeholder='Enter password' onChange={(event) => setPasswordValue(event.target.value)}/>
+        <input type='password' ref={passwordInputRef} className='form-control' placeholder='Enter password' />
       </div>
 
       <div className='form-group'>
@@ -53,9 +64,9 @@ const LoginComponent = ({userId}) => {
         </div>
       </div>
 
-      <Button type='submit' href="/home-page" onClick={() => signIn()}>
-        Submit
-      </Button>
+      {!isLoading && <Button onClick={() => signIn()}>Submit</Button>}
+      {isLoading && <p>Loading...</p>}
+
       <p className='forgot-password text-right'>
         Forgot <a href='#'>password?</a>
       </p>
