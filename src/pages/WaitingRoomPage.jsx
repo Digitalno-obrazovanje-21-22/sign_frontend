@@ -15,7 +15,6 @@ class WaitingRoomPage extends React.Component {
     fetchJoinedUsers = () => {
         axios.get(baseUrl + "/" + urls.roomUrl + "/" + this.state.roomId)
             .then(response => {
-                console.log(response);
                 this.setState({
                     joinedUsers: response.data
                 })

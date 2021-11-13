@@ -1,10 +1,9 @@
-import React, { Component, useContext, useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { baseUrl, urls } from '../../utils/baseUrls'
-import axios from 'axios'
-import { convertTypeAcquisitionFromJson } from 'typescript'
+import { urls } from '../../utils/baseUrls'
 import { useHistory } from 'react-router-dom'
 import AuthContext from '../../store/auth-context'
+import axiosInstance from '../../axiosInstance/axiosInstance'
 
 const SignUpComponent = () => {
   const history = useHistory()
@@ -26,8 +25,8 @@ const SignUpComponent = () => {
       password: passwordInputRef.current.value,
     }
 
-    axios
-      .post(baseUrl + urls.signUpUrl, dataToSubmit)
+    axiosInstance
+      .post(urls.signUpUrl, dataToSubmit)
       .then((response) => {
         const token = response.data.token
         authCtx.login(token)

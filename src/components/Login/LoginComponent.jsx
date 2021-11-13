@@ -1,9 +1,9 @@
-import axios from 'axios'
 import React, { useContext, useRef, useState } from 'react'
-import { baseUrl, urls } from '../../utils/baseUrls'
+import { urls } from '../../utils/baseUrls'
 import { Button } from 'react-bootstrap'
 import AuthContext from '../../store/auth-context'
 import { useHistory } from 'react-router-dom'
+import axiosInstance from '../../axiosInstance/axiosInstance'
 
 const LoginComponent = () => {
   const history = useHistory()
@@ -22,8 +22,8 @@ const LoginComponent = () => {
       password: passwordInputRef.current.value,
     }
 
-    axios
-      .post(baseUrl + urls.signInUrl, dataToSubmit)
+    axiosInstance
+      .post(urls.signInUrl, dataToSubmit)
       .then((response) => {
         if (response) {
           const token = response.data.token
@@ -68,7 +68,7 @@ const LoginComponent = () => {
       {isLoading && <p>Loading...</p>}
 
       <p className='forgot-password text-right'>
-        Forgot <a href='#'>password?</a>
+        Forgot <a href='/'>password?</a>
       </p>
     </form>
   )
