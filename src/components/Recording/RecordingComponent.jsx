@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 import { Container, Row } from "react-bootstrap";
 import VideoPreview from './VideoPreviw';
@@ -17,13 +17,13 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
 
   useEffect(() => {
     if (recordingStarted) {
-      startRecording();
+      startRecording()
     }
   }, [recordingStarted])
 
   useEffect(() => {
     if (recordingStopped) {
-      stopRecording();
+      stopRecording()
     }
   }, [recordingStopped])
 
@@ -60,9 +60,8 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
               <VideoPreview stream={previewStream} />
             </Row>
           </Container>
-        )
-        }
+        )}
       />
-    </Container >
+    </Container>
   )
 }
