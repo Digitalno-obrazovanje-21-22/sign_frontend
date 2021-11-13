@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import logo from '../../assets/logo2.png'
 import AuthContext from '../../store/auth-context'

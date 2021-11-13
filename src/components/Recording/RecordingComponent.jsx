@@ -1,9 +1,10 @@
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 import { Container, Row } from "react-bootstrap";
-import VideoPreview from './VideoPreviw';
+import VideoPreview from './VideoPreview';
 import io from "socket.io-client";
 import { v4 as uuid } from 'uuid';
+
 export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
 
   const socket = io.connect("http://localhost:3001");
@@ -19,20 +20,13 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
     if (recordingStarted) {
       startRecording()
     }
-  }, [recordingStarted])
-
-  useEffect(() => {
     if (recordingStopped) {
       stopRecording()
     }
-  }, [recordingStopped])
-
-
-  useEffect(() => {
     socket.on("msgToClient", (msg) => {
       recievedMessage(msg);
     })
-  }, [])
+  }, [recordingStopped, recordingStarted])
 
   function recievedMessage(msg) {
     console.log("Recieved: " + msg.text)
