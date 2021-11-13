@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import VideoPreview from './VideoPreviw';
+import io from "socket.io-client";
+import { v4 as uuid } from 'uuid';
 export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
 
+  const socket = io.connect("http://localhost:3001");
+
   const {
-    status,
     startRecording,
     stopRecording,
     mediaBlobUrl,
@@ -24,8 +27,28 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
     }
   }, [recordingStopped])
 
+
+  useEffect(() => {
+    socket.on("msgToClient", (msg) => {
+      recievedMessage(msg);
+    })
+  }, [])
+
+  function recievedMessage(msg) {
+    console.log("Recieved: " + msg.text)
+  }
+
+  function sendMessage() {
+    const newMessage = {
+      id: uuid,
+      text: "Start guessing!"
+    }
+    socket.emit("msgToServer", newMessage)
+  }
+
   return (
     <Container>
+      <button onClick={() => sendMessage()}>Send message</button>
       <a href={mediaBlobUrl} download='video_record'>
         Download
       </a>
