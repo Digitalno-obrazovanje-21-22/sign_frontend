@@ -1,25 +1,29 @@
-import axios from "axios";
+//import axios from "axios";
 import React from "react";
 import {Container, Button, Col, Row} from "react-bootstrap";
-import { baseUrl, urls } from "../utils/baseUrls";
+import WaitingParticipantsComponent from "../components/WaitingParticipants/WaitingParticipantsComponent";
+//import { baseUrl, urls } from "../utils/baseUrls";
 
 class WaitingRoomPage extends React.Component {
     constructor(props) {
         super(props);
+        //TODO: potrebno je provuc kontekst da se pamti room id i da se zacrni soba 
+        //u kojoj se pocelo igrat prije 5/5
+        //const context = useContext()
         this.state = {
-            roomId:null,
+            roomId:1,
             joinedUsers: []
         };
     }
 
-    fetchJoinedUsers = () => {
-        axios.get(baseUrl + "/" + urls.roomUrl + "/" + this.state.roomId)
-            .then(response => {
-                this.setState({
-                    joinedUsers: response.data
-                })
-            })
-    }
+    // fetchJoinedUsers = () => {
+    //     axios.get(baseUrl + urls.roomUrl + "/" + this.state.roomId)
+    //         .then(response => {
+    //             this.setState({
+    //                 joinedUsers: response.data
+    //             })
+    //         })
+    // }
 
     render () {
         return (
@@ -27,11 +31,15 @@ class WaitingRoomPage extends React.Component {
                 <Row>
                     <Col>
                         <h4>Waiting for other users to join..</h4>
+                        <h5>Currently here:</h5>
                     </Col>
+                </Row>
+                <Row style={{textAlign:"center", marginLeft:"8em"}}>
+                	<WaitingParticipantsComponent roomId={this.state.roomId}></WaitingParticipantsComponent>
                 </Row>
                 <Row>
                     <Col>
-                        <Button  size="md" style={{float:"right"}} href="/recording-page">Start game</Button>
+                        <Button  size="md" style={{float:"right"}} href="/waiting-start-game">Start game</Button>
                     </Col>
                 </Row>         
             </Container>

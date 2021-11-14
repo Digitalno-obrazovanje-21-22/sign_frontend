@@ -9,6 +9,7 @@ import LoginPage from './LoginPage'
 import RecordingPage from './RecordingPage'
 import SignUpPage from './SignUpPage'
 import WaitingRoomPage from './WaitingRoomPage'
+import StartGamePage from './StartGamePage'
 
 export const AuthRouter = () => {
   //Find authentiacation status
@@ -24,6 +25,7 @@ export const AuthRouter = () => {
           {!authCtx.isLoggedIn && <Route path='/sign-up' component={SignUpPage} />}
 
           {authCtx.isLoggedIn && <Route path='/recording' component={RecordingPage} />}
+          {authCtx.isLoggedIn && <Route path='/waiting-start-game' component={StartGamePage} />}
           {authCtx.isLoggedIn && <Route path='/leaderboard' component={LeaderboardPage} />}
           {authCtx.isLoggedIn && <Route path='/choosing-room' component={ChoosingRoomPage} />}
           {authCtx.isLoggedIn && <Route path='/waiting-room' component={WaitingRoomPage} />}

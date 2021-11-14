@@ -16,7 +16,7 @@ class LeaderboardPage extends React.Component {
     }
 
     getUsers = () => {
-        axiosInstance.get(baseUrl + "/" + urls.userUrl).then((response) => {
+        axiosInstance.get(baseUrl  + urls.userUrl).then((response) => {
             const data = response.data;
             this.setState({users: data})
         })
