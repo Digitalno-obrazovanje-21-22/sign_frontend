@@ -10,14 +10,15 @@ const WaitingParticipantsComponent = ({roomId}) => {
     const [users, setUsers] = useState([]);
     const getUsers = () => {
     axios.get(baseUrl + urls.roomParticipantUrl + "/" + roomId)
-        .then((responce) => {
-            console.log(responce);
-            const myUser = responce.data;
+        .then((response) => {
+            console.log(response);
+            const myUser = response.data;
             setUsers(myUser);
             console.log(roomId);
         })
     }
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => getUsers(),[]);
 
     return(
