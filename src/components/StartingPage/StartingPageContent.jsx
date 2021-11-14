@@ -1,8 +1,12 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import { useState } from 'react'
+import { useContext } from 'react'
 import VideoComponent from '../Recording/VideoComponent'
+import AuthContext from '../../store/auth-context'
 
 const StartingPageContent = ({ user }) => {
+  const authCtx = useContext(AuthContext)
+  const isLoggedIn = authCtx.isLoggedIn
   const [videos] = useState([
     {
       url: 'https://media.spreadthesign.com/video/mp4/13/109898.mp4',
@@ -49,13 +53,19 @@ const StartingPageContent = ({ user }) => {
         <h1>Welcome to Signs!</h1>
       </Col>
       <Container>
-        <div>
-          <b>Username: </b>
-          {user.firstName} {user.lastName}
-          <br />
-          <b>Score: </b>
-          {user.score}
-        </div>
+        {
+          isLoggedIn && (
+            <>
+          <div>
+            <b>Username: </b>
+            {user.firstName} {user.lastName}
+            <br />
+            <b>Score: </b>
+            {user.score == null ? '0' : user.score}
+          </div>
+            </>
+          )
+        }        
         <br />
         <Row>
           {videos.map((video, i) => {
