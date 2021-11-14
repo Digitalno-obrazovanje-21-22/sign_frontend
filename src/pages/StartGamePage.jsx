@@ -26,9 +26,19 @@ class StartGamePage extends React.Component {
                     <Col>
                     <h4>Game is starting in: </h4>
                     </Col>
+                    <Col>
+                        <TimerComponent></TimerComponent>
+                    </Col>
                 </Row>
                 <Row>
-                    <TimerComponent></TimerComponent>
+                    <h4> </h4>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3>First player: </h3>
+                    </Col>
+                    <Col>
+                    </Col>                  
                 </Row>
                 <Row>
                     <WaitingParticipantsComponent roomId={this.state.roomId}></WaitingParticipantsComponent>

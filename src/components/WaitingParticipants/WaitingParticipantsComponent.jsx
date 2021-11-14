@@ -25,7 +25,6 @@ const WaitingParticipantsComponent = ({roomId}) => {
       <Table variant="dark" striped bordered hover style={{width:"30em"}} responsive="true">
           <thead>
               <tr>
-                  <th>#</th>
                   <th>Username</th>
               </tr>
           </thead>
@@ -33,7 +32,6 @@ const WaitingParticipantsComponent = ({roomId}) => {
               {users.map((user, i ) => {
                   return(
                     <tr>
-                        <td> {i} </td>
                         <td> {user.userId} </td>
                     </tr>
                   )
