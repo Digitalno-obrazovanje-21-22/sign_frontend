@@ -11,18 +11,18 @@ const WaitingParticipantsComponent = () => {
 
     roomCtx.addToRoom(localStorage.getItem('roomId'))
     const roomId = roomCtx.roomId
-    
-    const [users, setUsers] = useState([]);
+
+    const [room, setRoom] = useState([]);
     const getUsers = () => {
     axios.get(baseUrl + urls.roomParticipantUrl + "/" + roomId)
         .then((response) => {
             console.log(response);
-            const myUser = response.data;
-            setUsers(myUser);
+            const myRoom = response.data;
+            setRoom(myRoom);
             console.log(roomId);
         })
     }
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => getUsers(),[]);
 
@@ -34,17 +34,17 @@ const WaitingParticipantsComponent = () => {
               </tr>
           </thead>
           <tbody>
-              {users.map((user, i ) => {
+               {room.map((user, i ) => {
                   return(
                     <tr>
-                        <td> {user.userId} </td>
+                        <td> {user.user.firstName} {user.user.lastName}</td>
                     </tr>
                   )
-              })}
+              })} 
           </tbody>
       </Table>
     )
-    
+
 }
 
 export default WaitingParticipantsComponent;
