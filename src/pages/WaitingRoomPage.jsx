@@ -12,7 +12,7 @@ class WaitingRoomPage extends React.Component {
         //u kojoj se pocelo igrat prije 5/5
         //const context = useContext()
         this.state = {
-            roomId:1,
+            roomId: localStorage.getItem("chosenRoomId"),
             joinedUsers: []
         };
     }

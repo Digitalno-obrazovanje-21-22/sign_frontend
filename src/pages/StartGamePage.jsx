@@ -9,7 +9,7 @@ class StartGamePage extends React.Component {
         super(props);
         //TODO: opet potrebno dodat context
         this.state = {
-            roomId:1
+            roomId:localStorage.getItem("chosenRoomId")
         };
     }
 

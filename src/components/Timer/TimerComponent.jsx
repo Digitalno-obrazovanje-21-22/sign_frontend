@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-const TimerComponent = () => {
+const TimerComponent = ({timerInit}) => {
     const Ref = useRef(null);
-    const [timer, setTimer] = useState('00:00:00');
+    const [timer, setTimer] = useState(timerInit || '00:00:00');
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());
@@ -35,7 +35,7 @@ const TimerComponent = () => {
         // If you adjust it you should also need to
         // adjust the Endtime formula we are about
         // to code next    
-        setTimer('00:00:05');
+        setTimer(timerInit);
   
         // If you try to remove this line the 
         // updating of timer Variable will be
@@ -63,8 +63,9 @@ const TimerComponent = () => {
     // mount only
     useEffect(() => {
         clearTimer(getDeadTime());
+        setTimer(timerInit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [timerInit]);
 
     
 
