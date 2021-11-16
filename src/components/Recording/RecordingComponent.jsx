@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Button, Col } from "react-bootstrap";
 import VideoPreview from './VideoPreview';
 import io from "socket.io-client";
 import { v4 as uuid } from 'uuid';
@@ -23,18 +23,23 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
     if (recordingStopped) {
       stopRecording()
     }
+  }, [recordingStopped, recordingStarted])
+
+
+  useEffect(() => {
+    function recievedMessage(msg) {
+      console.log("Recieved:");
+      console.log(msg)
+    }
+
     socket.on("msgToClient", (msg) => {
       recievedMessage(msg);
     })
-  }, [recordingStopped, recordingStarted])
-
-  function recievedMessage(msg) {
-    console.log("Recieved: " + msg.text)
-  }
+  }, []);
 
   function sendMessage() {
     const newMessage = {
-      id: uuid,
+      id: uuid(),
       text: "Start guessing!"
     }
     socket.emit("msgToServer", newMessage)
@@ -42,20 +47,30 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
 
   return (
     <Container>
-      <button onClick={() => sendMessage()}>Send message</button>
-      <a href={mediaBlobUrl} download='video_record'>
-        Download
-      </a>
-      <ReactMediaRecorder
-        video
-        render={() => (
-          <Container>
-            <Row>
-              <VideoPreview stream={previewStream} />
-            </Row>
-          </Container>
-        )}
-      />
+      <Row >
+        <Col md="2">
+          <Button size="md" variant="info" onClick={() => sendMessage()} style={{ marginBottom: "1em" }}>Send message</Button><br />
+          <Button size="md" variant="info" href={mediaBlobUrl} download='video_record'>
+            Download
+          </Button>
+        </Col>
+        <Col>
+          <ReactMediaRecorder
+            className="justify-content-md-center"
+            video
+            render={() => (
+              <Container>
+                <Row>
+                  <VideoPreview stream={previewStream} />
+                </Row>
+              </Container>
+            )}
+          />
+        </Col>
+        <Col md="2"></Col>
+      </Row>
+
+
     </Container>
   )
 }
