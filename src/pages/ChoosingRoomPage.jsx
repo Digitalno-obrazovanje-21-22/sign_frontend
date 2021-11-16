@@ -7,8 +7,9 @@ class ChoosingRoomPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      //TODO: fetch authenticated user
       userId: 1,
-      rooms: [],
+      rooms: []
     }
   }
 
@@ -29,22 +30,24 @@ class ChoosingRoomPage extends React.Component {
       isOwner: false,
       score: 0,
     }
-
     axiosInstance.post(urls.roomParticipantUrl, data).then((response) => {
-      // const newParticipant = response.data
+        console.log(response.data)
     })
+
+    //store chosenRoomId in localStorage
+    localStorage.setItem("chosenRoomId", roomId);
   }
 
   createRoom = () => {
-    axiosInstance.post(urls.roomUrl).then(
+    //create room
+     axiosInstance.post(urls.roomUrl).then(
       (response) => {
-        this.setState({
-          rooms: [...this.state.rooms, response.data],
-        })
-        this.joinRoom(response.data.id)
+        const roomId = response.data.id;
+        this.joinRoom(roomId)
       },
       (error) => console.log(error),
     )
+    this.props.history.push('/waiting-room');
   }
 
   render() {
@@ -60,7 +63,7 @@ class ChoosingRoomPage extends React.Component {
         </Row>
         <Row>
           <Col>
-            <Button onClick={() => this.createRoom()} href='/waiting-room' size='md' style={{ float: 'right' }}>
+            <Button onClick={() => this.createRoom()} size='md' style={{ float: 'right' }}>
               Create room
             </Button>
           </Col>
@@ -69,6 +72,7 @@ class ChoosingRoomPage extends React.Component {
           {this.state.rooms.map((room, roomIndex) => {
             return (
               <Card
+                key={room.id}
                 style={{
                   width: '15em',
                   marginLeft: '2em',
@@ -77,7 +81,7 @@ class ChoosingRoomPage extends React.Component {
                   backgroundColor: room.roomParticipants.length < 5 ? 'rgb(128, 204, 255, 0.3)' : 'rgb(128, 204, 255)',
                 }}
               >
-                <Card.Body>
+                <Card.Body key={room.id}>
                   <Card.Title>{room.name}</Card.Title>
                   <Card.Text>Number of joined users: {room.roomParticipants.length}/5</Card.Text>
                   <Button
