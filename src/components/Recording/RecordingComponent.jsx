@@ -21,7 +21,8 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
       startRecording()
     }
     if (recordingStopped) {
-      stopRecording()
+      stopRecording();
+      sendMessage();
     }
   }, [recordingStopped, recordingStarted])
 
@@ -30,6 +31,7 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
     function recievedMessage(msg) {
       console.log("Recieved:");
       console.log(msg)
+      //Start counter;
     }
 
     socket.on("msgToClient", (msg) => {
@@ -48,9 +50,9 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
   return (
     <Container>
       <Row >
-        <Col md="2">
-          <Button size="md" variant="info" onClick={() => sendMessage()} style={{ marginBottom: "1em" }}>Send message</Button><br />
-          <Button size="md" variant="info" href={mediaBlobUrl} download='video_record'>
+        <Col md="2"  className = "btn-block">
+          <Button className="btn btn-block" size="md" onClick={() => sendMessage()} style={{ width: "10em", marginBottom: "1em", backgroundColor:"#0099cc",  border:"#007399"  }}>Send message</Button><br />
+          <Button block={true}  className="btn btn-block" block href={mediaBlobUrl} download='video_record' style={{ width:"10em", marginBottom: "1em", backgroundColor:"#0099cc", border:"#007399" }}>
             Download
           </Button>
         </Col>
