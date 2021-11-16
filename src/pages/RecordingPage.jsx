@@ -50,7 +50,7 @@ class RecordingPage extends React.Component {
         </Row>
         {this.state.recordingStarted ? 
         <Container>
-          <Row style={{textAlign:"center"}}><h4>Sign: Good afternoon!</h4></Row>
+          <Row style={{textAlign:"center"}}><h4>{this.state.recordingStopped ? "Guess the sign!" : "Sign: Good afternoon!" }</h4></Row>
           <Row>
             <Col><RecordingComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped}></RecordingComponent></Col>
           </Row>

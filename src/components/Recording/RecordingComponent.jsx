@@ -50,9 +50,9 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
   return (
     <Container>
       <Row >
-        <Col md="2"  className = "btn-block">
+        <Col md="2">
           <Button className="btn btn-block" size="md" onClick={() => sendMessage()} style={{ width: "10em", marginBottom: "1em", backgroundColor:"#0099cc",  border:"#007399"  }}>Send message</Button><br />
-          <Button block={true}  className="btn btn-block" block href={mediaBlobUrl} download='video_record' style={{ width:"10em", marginBottom: "1em", backgroundColor:"#0099cc", border:"#007399" }}>
+          <Button className="btn btn-block" href={mediaBlobUrl} download='video_record' style={{ width:"10em", marginBottom: "1em", backgroundColor:"#0099cc", border:"#007399" }}>
             Download
           </Button>
         </Col>
@@ -71,7 +71,6 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
         </Col>
         <Col md="2"></Col>
       </Row>
-
 
     </Container>
   )
