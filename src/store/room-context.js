@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, setState} from "react";
 
 const RoomContext = React.createContext({
     roomId:'',
@@ -24,23 +24,25 @@ export function RoomContextProvider(props) {
     }
 
     const [roomId, setRoomId] = useState(initialRoom);
+    const [apartOfTheGame, setApartOfTheGame] = useState(!!initialRoom);
 
-    const userIsInGame = !!roomId;
+    const userInTheGame = !!roomId;
 
     const removeFromRoomHandler = useCallback(() => {
         setRoomId(null);
         localStorage.removeItem('roomId');
-
+        setApartOfTheGame(false);
     }, []);
 
     const addToRoomHandler = (roomId) => {
         localStorage.setItem('roomId', roomId);
+        setApartOfTheGame(true);
         setRoomId(roomId);
     };
 
     const contextValue = {
         roomId: roomId,
-        apartOfTheGame: userIsInGame,
+        apartOfTheGame: apartOfTheGame,
         addToRoom: addToRoomHandler,
         removeFromRoom: removeFromRoomHandler,
     };
