@@ -1,6 +1,7 @@
 //import axios from "axios";
 import React from "react";
 import {Container, Button, Col, Row} from "react-bootstrap";
+import BackToAllRoomsComponent from "../components/WaitingParticipants/BackToAllRoomsComponent";
 import WaitingParticipantsComponent from "../components/WaitingParticipants/WaitingParticipantsComponent";
 //import { baseUrl, urls } from "../utils/baseUrls";
 
@@ -35,13 +36,18 @@ class WaitingRoomPage extends React.Component {
                     </Col>
                 </Row>
                 <Row style={{textAlign:"center", marginLeft:"8em"}}>
-                	<WaitingParticipantsComponent roomId={this.state.roomId}></WaitingParticipantsComponent>
+                	<WaitingParticipantsComponent ></WaitingParticipantsComponent>
                 </Row>
                 <Row>
                     <Col>
                         <Button  size="md" style={{float:"right"}} href="/waiting-start-game">Start game</Button>
                     </Col>
                 </Row>         
+                <Row>
+                    <Col>
+                        <BackToAllRoomsComponent></BackToAllRoomsComponent>
+                    </Col>
+                </Row>
             </Container>
         )
     }

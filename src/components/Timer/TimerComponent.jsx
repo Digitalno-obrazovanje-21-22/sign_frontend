@@ -21,7 +21,7 @@ const TimerComponent = ({timerInit}) => {
   
             // update the timer
             // check if less than 10 then we need to 
-            // add '0' at the begining of the variable
+            // add '0' at the beginning of the variable
             setTimer(
                 (hours > 9 ? hours : '0' + hours) + ':' +
                 (minutes > 9 ? minutes : '0' + minutes) + ':'
@@ -51,7 +51,7 @@ const TimerComponent = ({timerInit}) => {
         let deadline = new Date();
   
         // This is where you need to adjust if 
-        // you entend to add more time
+        // you intend to add more time
         deadline.setSeconds(deadline.getSeconds() + 5);
         return deadline;
     }
