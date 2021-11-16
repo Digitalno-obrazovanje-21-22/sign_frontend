@@ -24,7 +24,7 @@ const BackToAllRoomsComponent = () => {
     useEffect(() => removeUser(), []);
 
     return(
-        <Button size="md" style={{float:"right"}} onClick={() => roomCtx.removeFromRoom()} href="/choosing-room">Return</Button>
+        <Button size="md" style={{float:"right", backgroundColor:"#0099cc", width:"8em"}} onClick={() => roomCtx.removeFromRoom()} href="/choosing-room">Return</Button>
     )
 }
 

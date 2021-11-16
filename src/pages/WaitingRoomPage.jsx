@@ -1,6 +1,6 @@
 //import axios from "axios";
 import React from "react";
-import {Container, Button, Col, Row} from "react-bootstrap";
+import { Container, Button, Col, Row } from "react-bootstrap";
 import BackToAllRoomsComponent from "../components/WaitingParticipants/BackToAllRoomsComponent";
 import WaitingParticipantsComponent from "../components/WaitingParticipants/WaitingParticipantsComponent";
 //import { baseUrl, urls } from "../utils/baseUrls";
@@ -26,28 +26,27 @@ class WaitingRoomPage extends React.Component {
     //         })
     // }
 
-    render () {
+    render() {
         return (
-            <Container style={{width:"55em", height:"auto", minHeight:"30em", background:"rgb(128, 204, 255, 0.3)"}}>
+            <Container style={{ width: "60em", height: "auto", minHeight: "30em", background: "rgb(128, 204, 255, 0.3)" }}>
                 <Row>
                     <Col>
                         <h4>Waiting for other users to join..</h4>
                         <h5>Currently here:</h5>
                     </Col>
                 </Row>
-                <Row style={{textAlign:"center", marginLeft:"8em"}}>
-                	<WaitingParticipantsComponent ></WaitingParticipantsComponent>
-                </Row>
                 <Row>
-                    <Col>
-                        <Button  size="md" style={{float:"right"}} href="/waiting-start-game">Start game</Button>
+                    <Col md={7}>
+                        <Row style={{ textAlign: "center", marginLeft: "8em" }}>
+                            <WaitingParticipantsComponent ></WaitingParticipantsComponent>
+                        </Row>
                     </Col>
-                </Row>         
-                <Row>
                     <Col>
-                        <BackToAllRoomsComponent></BackToAllRoomsComponent>
+                    <Button size="md" style={{ float: "right", backgroundColor:"#0099cc", marginLeft:"1em", width:"8em"}} href="/waiting-start-game">Start game</Button>
+                    <BackToAllRoomsComponent></BackToAllRoomsComponent>
                     </Col>
                 </Row>
+
             </Container>
         )
     }
