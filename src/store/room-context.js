@@ -15,37 +15,37 @@ const retrieveStoredRoom = () => {
 }
 
 
-export const RoomContextProvider = (props) => {
-    const roomData = retrieveStoredRoom()
+export function RoomContextProvider(props) {
+    const roomData = retrieveStoredRoom();
 
-    let initialRoom
-    if(roomData){
-        initialRoom = roomData.roomId
+    let initialRoom;
+    if (roomData) {
+        initialRoom = roomData.roomId;
     }
 
-    const [roomId, setRoomId] =  useState(initialRoom)
+    const [roomId, setRoomId] = useState(initialRoom);
 
-    const userIsInGame = !!roomId
+    const userIsInGame = !!roomId;
 
-    const removeFromRoomHandler = useCallback(
-        () => {
-            setRoomId(null)
-            localStorage.removeItem('roomId')
-    },[])
+    const removeFromRoomHandler = useCallback(() => {
+        setRoomId(null);
+        localStorage.removeItem('roomId');
+
+    }, []);
 
     const addToRoomHandler = (roomId) => {
-        localStorage.setItem('roomId', roomId)
-        setRoomId(roomId)
-    }
+        localStorage.setItem('roomId', roomId);
+        setRoomId(roomId);
+    };
 
     const contextValue = {
         roomId: roomId,
         apartOfTheGame: userIsInGame,
         addToRoom: addToRoomHandler,
         removeFromRoom: removeFromRoomHandler,
-    }  
-    
-    return <RoomContext.Provider value={contextValue}>{props.children}</RoomContext.Provider>
+    };
+
+    return <RoomContext.Provider value={contextValue}>{props.children}</RoomContext.Provider>;
 
 }
 

@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
           </Navbar.Brand>
           <Nav className='me-auto'>
             <Nav.Link href='/'>Home</Nav.Link>
-            {isLoggedIn && !isInRoom && (
+            {isLoggedIn && (
               <>
                 <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
                 <Nav.Link href='/choosing-room'>Join room</Nav.Link>
