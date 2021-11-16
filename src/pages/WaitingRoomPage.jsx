@@ -35,7 +35,7 @@ class WaitingRoomPage extends React.Component {
                     </Col>
                 </Row>
                 <Row style={{textAlign:"center", marginLeft:"8em"}}>
-                	<WaitingParticipantsComponent roomId={this.state.roomId}></WaitingParticipantsComponent>
+                	<WaitingParticipantsComponent ></WaitingParticipantsComponent>
                 </Row>
                 <Row>
                     <Col>

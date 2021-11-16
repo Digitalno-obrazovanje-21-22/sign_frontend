@@ -1,7 +1,8 @@
-import React from 'react'
-import { urls } from '../utils/baseUrls'
+import React, { useContext } from 'react'
+import { baseUrl, urls } from '../utils/baseUrls'
 import { Card, Button, Container, Row, Col } from 'react-bootstrap'
 import axiosInstance from '../axiosInstance/axiosInstance'
+import RoomContext, { RoomContextProvider } from '../store/room-context'
 
 class ChoosingRoomPage extends React.Component {
   constructor(props) {
@@ -23,16 +24,20 @@ class ChoosingRoomPage extends React.Component {
   }
 
   joinRoom = (roomId, roomIndex) => {
+
     const data = {
       userId: this.state.userId,
       roomId: roomId,
       isOwner: false,
       score: 0,
     }
-
+    localStorage.setItem('roomId', roomId)
+    
     axiosInstance.post(urls.roomParticipantUrl, data).then((response) => {
       // const newParticipant = response.data
     })
+
+
   }
 
   createRoom = () => {
@@ -42,6 +47,7 @@ class ChoosingRoomPage extends React.Component {
           rooms: [...this.state.rooms, response.data],
         })
         this.joinRoom(response.data.id)
+        localStorage.setItem('roomId', response.data.id);
       },
       (error) => console.log(error),
     )

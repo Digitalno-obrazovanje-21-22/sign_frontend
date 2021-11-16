@@ -2,11 +2,14 @@ import { useContext } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import logo from '../../assets/logo2.png'
 import AuthContext from '../../store/auth-context'
+import RoomContext from '../../store/room-context'
 
 const Layout = ({ children }) => {
   const authCtx = useContext(AuthContext)
+  const roomCtx = useContext(RoomContext)
   const logoutHandler = () => authCtx.logout()
   const isLoggedIn = authCtx.isLoggedIn
+  const isInRoom = roomCtx.apartOfTheGame
   return (
     <div>
       <Navbar bg='dark' variant='dark'>
@@ -16,7 +19,7 @@ const Layout = ({ children }) => {
           </Navbar.Brand>
           <Nav className='me-auto'>
             <Nav.Link href='/'>Home</Nav.Link>
-            {isLoggedIn && (
+            {isLoggedIn && !isInRoom && (
               <>
                 <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
                 <Nav.Link href='/choosing-room'>Join room</Nav.Link>
