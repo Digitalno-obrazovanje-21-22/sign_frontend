@@ -3,8 +3,12 @@ import { baseUrl, urls } from '../utils/baseUrls'
 import { Card, Button, Container, Row, Col } from 'react-bootstrap'
 import axiosInstance from '../axiosInstance/axiosInstance'
 import RoomContext, { RoomContextProvider } from '../store/room-context'
+import  authContext  from "../store/auth-context"; 
+import { couldStartTrivia } from 'typescript'
 
 class ChoosingRoomPage extends React.Component {
+  static contextType = authContext;
+
   constructor(props) {
     super(props)
     this.state = {
@@ -15,6 +19,10 @@ class ChoosingRoomPage extends React.Component {
   }
 
   componentDidMount() {
+    //TODO: potrebno je ovo izmjenit da u kontekstu cuvamo userid kako bi mogli svaki puta s novim zvat
+    //ili preko tekoena
+    const user = this.context;
+    console.log("User iz mounta:  " + user);
     this.fetchAvailableRooms()
   }
 
