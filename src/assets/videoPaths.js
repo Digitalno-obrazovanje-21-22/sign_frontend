@@ -1,0 +1,27 @@
+const videosPath = [
+  { name: 'Black', url: '/videos/black' },
+  { name: 'Good afternoon', url: '/videos/good_afternoon' },
+  { name: 'Pain', url: '/videos/pain' },
+  { name: 'Blue', url: '/videos/blue' },
+  { name: 'Happy', url: '/videos/happy' },
+  { name: 'Red', url: '/videos/red' },
+  { name: 'Bored', url: '/videos/bored' },
+  { name: 'Happy birthday', url: '/videos/happy_birthday' },
+  { name: 'Surprise', url: '/videos/surprise' },
+  { name: 'Can i help you', url: '/videos/can_i_help_you' },
+  { name: 'Hi', url: '/videos/hi' },
+  { name: 'Thank god', url: '/videos/thank_god' },
+  { name: 'Depressed', url: '/videos/depressed' },
+  { name: 'How are you', url: '/videos/how_are_you' },
+  { name: 'Where is the bathroom', url: '/videos/where_is_the_bathroom' },
+  { name: 'Exhausted', url: '/videos/exhausted' },
+  { name: 'Hungry', url: '/videos/hungry' },
+  { name: 'White', url: '/videos/white' },
+  { name: 'Frustrated', url: '/videos/frustrated' },
+  { name: 'No', url: '/videos/no' },
+  { name: 'Yes', url: '/videos/yes' },
+  { name: 'Good', url: '/videos/good' },
+  { name: 'Ok', url: '/videos/ok' },
+]
+
+export default videosPath
