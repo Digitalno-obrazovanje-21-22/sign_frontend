@@ -37,18 +37,24 @@ class RecordingPage extends React.Component {
     }, 10000)
   }
 
+  //TODO: fetch random sign name from BE
+
   render() {
     return (
-      <Container style={{ width: "100%", paddingTop: "1em", minHeight: "40em", height:"auto", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
+      <Container style={{ width: "100%", paddingTop: "1em", minHeight: "40em", height: "auto", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
         <Row>
           <Alert variant={this.state.alertVariant} style={{ textAlign: "center" }}>
             {this.state.alertText}
             <TimerComponent timerInit={this.state.timerInit}></TimerComponent>
           </Alert>
         </Row>
-        <Row>
-          <Col><RecordingComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped}></RecordingComponent></Col>
-        </Row>
+        {this.state.recordingStarted ? 
+        <Container>
+          <Row style={{textAlign:"center"}}><h4>{this.state.recordingStopped ? "Guess the sign!" : "Sign: Good afternoon!" }</h4></Row>
+          <Row>
+            <Col><RecordingComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped}></RecordingComponent></Col>
+          </Row>
+        </Container> : null}
       </Container>
     )
   }
