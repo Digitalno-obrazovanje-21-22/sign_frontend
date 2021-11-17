@@ -13,7 +13,6 @@ class ChoosingRoomPage extends React.Component {
     super(props)
     this.state = {
       //TODO: fetch authenticated user
-      userId: 1,
       rooms: []
     }
   }
@@ -35,7 +34,7 @@ class ChoosingRoomPage extends React.Component {
   joinRoom = (roomId, roomIndex) => {
 
     const data = {
-      userId: this.state.userId,
+      userId: localStorage.getItem('userId'),
       roomId: roomId,
       isOwner: false,
       score: 0,
