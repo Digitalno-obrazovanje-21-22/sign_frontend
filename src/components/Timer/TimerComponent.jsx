@@ -52,7 +52,8 @@ const TimerComponent = ({timerInit}) => {
   
         // This is where you need to adjust if 
         // you intend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 5);
+        const seconds = parseInt(timerInit.split(":")[2]);
+        deadline.setSeconds(deadline.getSeconds() + seconds);
         return deadline;
     }
 

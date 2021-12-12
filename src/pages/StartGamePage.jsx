@@ -27,7 +27,7 @@ class StartGamePage extends React.Component {
                     <h4>Game is starting in: </h4>
                     </Col>
                     <Col>
-                        <TimerComponent></TimerComponent>
+                        <TimerComponent timerInit={'00:00:05'}></TimerComponent>
                     </Col>
                 </Row>
                 <Row>

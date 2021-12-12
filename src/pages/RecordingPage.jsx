@@ -22,7 +22,7 @@ class RecordingPage extends React.Component {
         recordingStarted: true,
         alertText: "Recording started...",
         alertVariant: "danger",
-        timerInit: "00:00:05 "
+        timerInit: "00:00:10 "
       })
       //console.log("Recording started...");
     }, 5000)
@@ -31,10 +31,10 @@ class RecordingPage extends React.Component {
         recordingStopped: true,
         alertText: "Start guessing",
         alertVariant: "success",
-        timerInit: "00:00:05"
+        timerInit: "00:00:10"
       })
       //console.log("Recording stopped");
-    }, 10000)
+    }, 15000)
   }
 
   //TODO: fetch random sign name from BE
