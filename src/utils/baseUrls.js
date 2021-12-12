@@ -6,5 +6,6 @@ export const urls = {
     userUrl: "/user",
     videoUrl: "video",
     roomUrl: "/room",
-    roomParticipantUrl: "/room-participant"
+    roomParticipantUrl: "/room-participant",
+    signsUrl:"/sign"
 };

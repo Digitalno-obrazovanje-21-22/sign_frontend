@@ -3,7 +3,7 @@ import { useState } from "react";
 const GuessingComponent = ({ }) => {
 
     const [answer, setAnswer] = useState();
-    const [allAnswers, setAllAnswers] = useState(null);
+    const [allAnswers, setAllAnswers] = useState("");
 
     const setAnswerValue = (text) => {
         setAnswer(text);
@@ -11,7 +11,7 @@ const GuessingComponent = ({ }) => {
     }
 
     const appendAnswer = () => {
-        (allAnswers === null) ? setAllAnswers(answer) : setAllAnswers(allAnswers + "\n" + answer);
+        (allAnswers==="") ? setAllAnswers(answer) : setAllAnswers(allAnswers + "\n" + answer);
         setAnswer("");
     }
 
@@ -32,7 +32,7 @@ const GuessingComponent = ({ }) => {
 
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <textarea style={{ width: "18em", height:"10em", backgroundColor:"rgb(128, 204, 255, 0.7)" }} value={allAnswers}></textarea>
+                    <textarea readOnly style={{ width: "18em", height:"10em", backgroundColor:"rgb(128, 204, 255, 0.7)" }} value={allAnswers}></textarea>
                 </div>
 
             </Row>
