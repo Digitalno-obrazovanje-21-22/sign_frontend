@@ -20,6 +20,7 @@ const WaitingParticipantsComponent = () => {
             const myUser = response.data;
             setUsers(myUser);
             console.log(roomId);
+            console.log(myUser);
         })
     }
     
@@ -37,7 +38,7 @@ const WaitingParticipantsComponent = () => {
               {users.map((user, i ) => {
                   return(
                     <tr>
-                        <td> {user.userId} </td>
+                        <td> {user.user.firstName}  {user.user.lastName} </td>
                     </tr>
                   )
               })}
