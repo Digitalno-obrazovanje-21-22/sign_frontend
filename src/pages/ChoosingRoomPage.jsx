@@ -9,7 +9,7 @@ class ChoosingRoomPage extends React.Component {
     super(props)
     this.state = {
       //TODO: fetch authenticated user
-      userId: 1,
+      userId: localStorage.getItem('userId'),
       rooms: []
     }
   }
