@@ -1,7 +1,9 @@
-import { RecordingComponent } from '../components/Recording/RecordingComponent'
+
 import React from 'react';
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import TimerComponent from '../components/Timer/TimerComponent';
+import RecordingVideoComponent from '../components/Recording/RecordingVideoComponent';
+import GuessingComponent from '../components/GuessingSign/GuessingComponent';
 class RecordingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class RecordingPage extends React.Component {
       userId: 1,
       recordingStarted: false,
       recordingStopped: false,
-      alertText: "Recording will start in..",
+      alertText: "Recording will start in 5 seconds",
       alertVariant: "success",
       timerInit: "00:00:05"
     };
@@ -44,17 +46,13 @@ class RecordingPage extends React.Component {
       <Container style={{ width: "100%", paddingTop: "1em", minHeight: "40em", height: "auto", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
         <Row>
           <Alert variant={this.state.alertVariant} style={{ textAlign: "center" }}>
-            {this.state.alertText}
             <TimerComponent timerInit={this.state.timerInit}></TimerComponent>
           </Alert>
         </Row>
-        {this.state.recordingStarted ? 
-        <Container>
-          <Row style={{textAlign:"center"}}><h4>{this.state.recordingStopped ? "Guess the sign!" : "Sign: Good afternoon!" }</h4></Row>
-          <Row>
-            <Col><RecordingComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped}></RecordingComponent></Col>
-          </Row>
-        </Container> : null}
+        
+        {!this.state.recordingStarted ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr/></Row> : null}
+        {this.state.recordingStarted && !this.state.recordingStopped ? <RecordingVideoComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped}></RecordingVideoComponent>: null}
+        {this.state.recordingStarted && this.state.recordingStopped ? <GuessingComponent></GuessingComponent>: null}
       </Container>
     )
   }
