@@ -9,16 +9,15 @@ const BackToAllRoomsComponent = () => {
     const authCtx = useContext(AuthContext)
     const roomCtx = useContext(RoomContext)
 
-    const roomId = roomCtx.roomId
-    console.log(roomCtx.apartOfTheGame)
+    const roomId = localStorage.getItem('chosenRoomId')
     
 
 
     const removeUser = () => {
-        axios.post(baseUrl + urls.roomParticipantUrl + "/" + roomId)
-        .then((response) => {
-            console.log(response)
-        } )
+        // axios.post(baseUrl + urls.roomParticipantUrl + '/' + roomId).then((response) => {
+        //   console.log(response)
+        // })
+        console.log("ovdje je bio post?")
     }
 
     useEffect(() => removeUser(), []);

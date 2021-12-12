@@ -7,10 +7,10 @@ import RoomContext from "../../store/room-context";
 
 const WaitingParticipantsComponent = () => {
     const authCtx = useContext(AuthContext)
-    const roomCtx = useContext(RoomContext)
+    // const roomCtx = useContext(RoomContext)
 
-    roomCtx.addToRoom(localStorage.getItem('roomId'))
-    const roomId = roomCtx.roomId
+    // roomCtx.addToRoom(localStorage.getItem('roomId'))
+    const roomId = localStorage.getItem('chosenRoomId')
     
     const [users, setUsers] = useState([]);
     const getUsers = () => {
