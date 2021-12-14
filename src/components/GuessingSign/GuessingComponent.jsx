@@ -1,9 +1,11 @@
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-const GuessingComponent = ({ }) => {
+const GuessingComponent = ({ sign }) => {
 
     const [answer, setAnswer] = useState();
     const [allAnswers, setAllAnswers] = useState("");
+    const [alertVariant, setAlertVariant] = useState("error");
+    const [alertMessage, setAlertMessage] = useState("");
 
     const setAnswerValue = (text) => {
         setAnswer(text);
@@ -11,7 +13,15 @@ const GuessingComponent = ({ }) => {
     }
 
     const appendAnswer = (event) => {
-        (allAnswers === "") ? setAllAnswers(answer) : setAllAnswers(allAnswers + "\n" + answer);
+        if (answer === sign) {
+            setAlertVariant("success");
+            setAlertMessage("Good job! " + "Correct answer is " + answer);
+        }
+        else {
+            setAlertVariant("danger");
+            setAlertMessage( "Incorrect answer. Please try again...");
+        }
+        (allAnswers === "") ? setAllAnswers("User1: " + answer) : setAllAnswers(allAnswers + "\nUser1: " + answer);
         setAnswer("");
     }
 
@@ -24,6 +34,11 @@ const GuessingComponent = ({ }) => {
 
             </Row>
             <Row>
+                <Container style={{textAlign:"center"}}>
+                    <Alert variant={alertVariant}>
+                        {alertMessage}
+                    </Alert>
+                </Container>
                 <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Form >
                         <Form.Control style={{ marginRight: "1em" }} type="text" placeholder="Enter your answer..." value={answer} onChange={(e) => setAnswerValue(e.target.value)} />
@@ -31,10 +46,10 @@ const GuessingComponent = ({ }) => {
                     <Button onClick={() => appendAnswer()} size="md" style={{ backgroundColor: "#0099cc", border: "#007399" }}>Send</Button>
                 </Container>
                 <Container style={{ display: "flex", justifyContent: "center" }}>
-                  
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <textarea readOnly style={{ width: "18em", height: "10em", backgroundColor: "rgb(128, 204, 255, 0.4)" }} value={allAnswers}></textarea>
-                </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <textarea readOnly style={{ width: "18em", height: "10em", backgroundColor: "rgb(128, 204, 255, 0.4)" }} value={allAnswers}></textarea>
+                    </div>
 
                 </Container>
             </Row>
