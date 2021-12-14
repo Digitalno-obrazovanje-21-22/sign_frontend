@@ -62,7 +62,7 @@ class RecordingPage extends React.Component {
         
         {!this.state.recordingStarted ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr/></Row> : null}
         {this.state.recordingStarted && !this.state.recordingStopped ? <RecordingVideoComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped} sign={this.state.sign}></RecordingVideoComponent>: null}
-        {this.state.recordingStarted && this.state.recordingStopped ? <GuessingComponent></GuessingComponent>: null}
+        {this.state.recordingStarted && this.state.recordingStopped ? <GuessingComponent sign={this.state.sign}></GuessingComponent>: null}
       </Container>
     )
   }

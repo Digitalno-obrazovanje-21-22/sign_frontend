@@ -1,28 +1,31 @@
 import { Container, Form, Row, Button, Alert } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const GuessingComponent = ({ sign }) => {
 
-    const [answer, setAnswer] = useState();
-    const [allAnswers, setAllAnswers] = useState("");
+    const [selectedAnswer, setSelectedAnswer] = useState();
     const [alertVariant, setAlertVariant] = useState("error");
     const [alertMessage, setAlertMessage] = useState("");
+   
+    /*useEffect(() => {
+        setTimeout(() => {
+            console.log("Times up")
+            if(selectedAnswer===sign){
+                console.log(sign)
+                console.log(selectedAnswer)
 
-    const setAnswerValue = (text) => {
-        setAnswer(text);
-        console.log(text);
-    }
+                setAlertVariant("success");
+                setAlertMessage("Good job! Correct answer is " + sign);
+            }
+            else{
+                setAlertVariant("danger");
+                setAlertMessage("Your answer is incorrect..");
+            }
+        }, 10000)   
+    }, []);*/
 
-    const appendAnswer = (event) => {
-        if (answer === sign) {
-            setAlertVariant("success");
-            setAlertMessage("Good job! " + "Correct answer is " + answer);
-        }
-        else {
-            setAlertVariant("danger");
-            setAlertMessage( "Incorrect answer. Please try again...");
-        }
-        (allAnswers === "") ? setAllAnswers("User1: " + answer) : setAllAnswers(allAnswers + "\nUser1: " + answer);
-        setAnswer("");
+    const handleClick = (answer) => {
+        setSelectedAnswer(answer);
+        console.log(selectedAnswer)
     }
 
     return (
@@ -34,23 +37,48 @@ const GuessingComponent = ({ sign }) => {
 
             </Row>
             <Row>
-                <Container style={{textAlign:"center"}}>
+                <Container style={{ textAlign: "center" }}>
                     <Alert variant={alertVariant}>
                         {alertMessage}
                     </Alert>
                 </Container>
-                <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Form >
-                        <Form.Control style={{ marginRight: "1em" }} type="text" placeholder="Enter your answer..." value={answer} onChange={(e) => setAnswerValue(e.target.value)} />
+                <Container style={{textAlign:"center"}}>
+                    <Row >
+                        <h3>Choose your answer:</h3>
+                    </Row>
+                    <Row>
+                    <Form>
+                        <Form.Check inline
+                            label="Happy"
+                            value="Happy"
+                            type="radio"
+                            checked={selectedAnswer === "Happy"}
+                            onClick={() => handleClick("Happy")}
+                            >
+                        </Form.Check>
+                        <Form.Check inline
+                            label="Pain"
+                            type="radio"
+                            checked={selectedAnswer === "Pain"}
+                            onClick={() => handleClick("Pain")}
+                            >
+                        </Form.Check>
+                        <Form.Check inline
+                            label="Good Afternoon"
+                            type="radio"
+                            checked={selectedAnswer === "Good Afternoon"}
+                            onClick={() => handleClick("Good Afternoon")}>
+                        </Form.Check>
+                        <Form.Check inline
+                            label="Happy birthday"
+                            type="radio"
+                            checked={selectedAnswer === "Happy birthday"}
+                            onClick={() => handleClick("Happy birthday")}>
+                        </Form.Check>
+
                     </Form>
-                    <Button onClick={() => appendAnswer()} size="md" style={{ backgroundColor: "#0099cc", border: "#007399" }}>Send</Button>
-                </Container>
-                <Container style={{ display: "flex", justifyContent: "center" }}>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <textarea readOnly style={{ width: "18em", height: "10em", backgroundColor: "rgb(128, 204, 255, 0.4)" }} value={allAnswers}></textarea>
-                    </div>
-
+                    </Row>
+                   
                 </Container>
             </Row>
 
