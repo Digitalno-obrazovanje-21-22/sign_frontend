@@ -1,27 +1,26 @@
 import { Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
-const GuessingComponent = ({ correctSign, signs }) => {
+const GuessingComponent = ({ guessingStopped, correctSign, signs }) => {
 
     const [alertVariant, setAlertVariant] = useState("error");
     const [alertMessage, setAlertMessage] = useState("");
     const [selectedOption, setSelectedOption] = useState("something");
 
     useEffect(() => {
-        setTimeout(() => {
-            console.log("Times up")
+        if(guessingStopped){
             console.log(localStorage.getItem("answer"))
-            if(localStorage.getItem("answer")===correctSign){
+            if (localStorage.getItem("answer") === correctSign) {
                 setAlertVariant("success");
                 setAlertMessage("Good job! Correct answer is " + correctSign);
             }
-            else{
+            else {
                 setAlertVariant("danger");
                 setAlertMessage("Your answer is incorrect. Correct answer is: " + correctSign);
             }
             localStorage.setItem("answer", "")
-        }, 10000)  
-    }, []);
+        }
+    }, [guessingStopped]);
 
     const onValueChange = (value) => {
         setSelectedOption(value)
@@ -42,26 +41,26 @@ const GuessingComponent = ({ correctSign, signs }) => {
                         {alertMessage}
                     </Alert>
                 </Container>
-                <Container style={{ textAlign: "center", width:"30em", backgroundColor:"rgb(198, 213, 216, 0.3)", padding:"2em", border:"1px solid black" }}>
+                <Container style={{ textAlign: "center", width: "30em", backgroundColor: "rgb(198, 213, 216, 0.3)", padding: "2em", border: "1px solid black" }}>
                     <Row >
                         <h3>Choose your answer:</h3><hr></hr>
                     </Row>
                     <Row>
-                        <Container style={{textAlign:"left", marginLeft:"5em"}}>
+                        <Container style={{ textAlign: "left", marginLeft: "5em" }}>
                             <form >
                                 {signs.map((sign, i) => {
-                                    return(
+                                    return (
                                         <div className="radio">
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                value={sign}
-                                                checked={selectedOption === sign}
-                                                onChange={(e) => onValueChange(e.target.value)}
-                                            />
-                                            {sign}
-                                        </label>
-                                    </div>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value={sign}
+                                                    checked={selectedOption === sign}
+                                                    onChange={(e) => onValueChange(e.target.value)}
+                                                />
+                                                {sign}
+                                            </label>
+                                        </div>
                                     )
                                 })}
                             </form>

@@ -4,8 +4,9 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import TimerComponent from '../components/Timer/TimerComponent';
 import RecordingVideoComponent from '../components/Recording/RecordingVideoComponent';
 import GuessingComponent from '../components/GuessingSign/GuessingComponent';
-import {urls} from '../utils/baseUrls';
+import { urls } from '../utils/baseUrls';
 import axiosInstance from '../axiosInstance/axiosInstance'
+import GameEndComponent from '../components/GameEnd/GameEndComponent';
 class RecordingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -14,31 +15,32 @@ class RecordingPage extends React.Component {
       userId: 1,
       recordingStarted: false,
       recordingStopped: false,
+      guessingStopped: false,
       alertText: "Recording will start in 5 seconds",
       alertVariant: "success",
       timerInit: "00:00:05",
-      signs:null,
-      correctSign:null 
+      signs: null,
+      correctSign: null
     };
   }
 
   //TODO: fetch random signs from BE
   fetchRandomSign = () => {
     axiosInstance.get(urls.signsUrl + "/random").then((response) => {
-        let signNames = [];
+      let signNames = [];
 
-        const randomSigns = response.data;
-        randomSigns.forEach(sign => {
-          signNames.push(sign.name)
-          if(sign.isCorrect){
-            this.setState({
-              correctSign: sign.name
-            })
-          }
-        })
-        this.setState({
-          signs: signNames
-        })
+      const randomSigns = response.data;
+      randomSigns.forEach(sign => {
+        signNames.push(sign.name)
+        if (sign.isCorrect) {
+          this.setState({
+            correctSign: sign.name
+          })
+        }
+      })
+      this.setState({
+        signs: signNames
+      })
     })
   }
 
@@ -63,6 +65,16 @@ class RecordingPage extends React.Component {
       })
       //console.log("Recording stopped");
     }, 15000)
+
+    setTimeout(() => {
+      this.setState({
+        alertText: "Time's up. Next round starting in...",
+        alertVariant: "success",
+        guessingStopped: true,
+        timerInit: "00:00:05"
+      })
+      console.log("Guessing stopped!")
+    }, 25000)
   }
 
   render() {
@@ -73,10 +85,11 @@ class RecordingPage extends React.Component {
             <TimerComponent timerInit={this.state.timerInit}></TimerComponent>
           </Alert>
         </Row>
-        
-        {!this.state.recordingStarted ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr/></Row> : null}
-        {this.state.recordingStarted && !this.state.recordingStopped ? <RecordingVideoComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped} correctSign={this.state.correctSign}></RecordingVideoComponent>: null}
-        {this.state.recordingStarted && this.state.recordingStopped ? <GuessingComponent correctSign={this.state.correctSign} signs={this.state.signs}></GuessingComponent>: null}
+
+        {!this.state.recordingStarted || this.state.guessingStopped ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr /></Row> : null}
+        {this.state.recordingStarted && !this.state.recordingStopped ? <RecordingVideoComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped} correctSign={this.state.correctSign}></RecordingVideoComponent> : null}
+        {this.state.recordingStarted && this.state.recordingStopped && !this.state.guessingStopped? <GuessingComponent guessingStopped={this.state.guessingStopped} correctSign={this.state.correctSign} signs={this.state.signs}></GuessingComponent> : null}
+        {this.state.guessingStopped ? <GameEndComponent></GameEndComponent> : null}
       </Container>
     )
   }
