@@ -29,7 +29,7 @@ const GuessingComponent = ({ guessingStopped, correctSign, signs }) => {
 
     return (
         <Container >
-            <Row style={{ textAlign: "center" }}><h4>Guess the sign!</h4></Row><hr />
+            <Row style={{ textAlign: "center" }}><h4>{guessingStopped ? "Time's up" : "Guess the sign!" }</h4></Row><hr />
             <Row>
 
 

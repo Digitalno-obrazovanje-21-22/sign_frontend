@@ -16,6 +16,7 @@ class RecordingPage extends React.Component {
       recordingStarted: false,
       recordingStopped: false,
       guessingStopped: false,
+      roundOverviewStarted: false,
       alertText: "Recording will start in 5 seconds",
       alertVariant: "success",
       timerInit: "00:00:05",
@@ -59,22 +60,23 @@ class RecordingPage extends React.Component {
     setTimeout(() => {
       this.setState({
         recordingStopped: true,
-        alertText: "Start guessing",
-        alertVariant: "success",
         timerInit: "00:00:10"
       })
       //console.log("Recording stopped");
     }, 15000)
-
     setTimeout(() => {
       this.setState({
-        alertText: "Time's up. Next round starting in...",
-        alertVariant: "success",
         guessingStopped: true,
         timerInit: "00:00:05"
       })
-      console.log("Guessing stopped!")
     }, 25000)
+    setTimeout(() => {
+      this.setState({
+        roundOverviewStarted: true,
+        timerInit: "00:00:10"
+      })
+      console.log("Guessing stopped!")
+    }, 30000)
   }
 
   render() {
@@ -86,10 +88,10 @@ class RecordingPage extends React.Component {
           </Alert>
         </Row>
 
-        {!this.state.recordingStarted || this.state.guessingStopped ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr /></Row> : null}
+        {!this.state.recordingStarted ? <Row style={{ textAlign: "center" }}><h4>{this.state.alertText}</h4><hr /></Row> : null}
         {this.state.recordingStarted && !this.state.recordingStopped ? <RecordingVideoComponent recordingStarted={this.state.recordingStarted} recordingStopped={this.state.recordingStopped} correctSign={this.state.correctSign}></RecordingVideoComponent> : null}
-        {this.state.recordingStarted && this.state.recordingStopped && !this.state.guessingStopped? <GuessingComponent guessingStopped={this.state.guessingStopped} correctSign={this.state.correctSign} signs={this.state.signs}></GuessingComponent> : null}
-        {this.state.guessingStopped ? <GameEndComponent></GameEndComponent> : null}
+        {this.state.recordingStarted && this.state.recordingStopped && !this.state.roundOverviewStarted ? <GuessingComponent guessingStopped={this.state.guessingStopped} correctSign={this.state.correctSign} signs={this.state.signs}></GuessingComponent> : null}
+        {this.state.roundOverviewStarted ? <GameEndComponent></GameEndComponent> : null}
       </Container>
     )
   }

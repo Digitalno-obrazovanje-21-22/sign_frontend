@@ -25,6 +25,7 @@ const GameEndComponent = ({ }) => {
 
     return (
         <Container>
+            <Row style={{ textAlign: "center" }}><h4>Next round starting in 10 seconds...</h4></Row><hr />
             <Row>
                 <Container style={{ width: "35em", backgroundColor: "rgb(198, 213, 216, 0.3)", padding: "2em", border: "1px solid black" }}>
                     <Row style={{textAlign:"center"}} >
