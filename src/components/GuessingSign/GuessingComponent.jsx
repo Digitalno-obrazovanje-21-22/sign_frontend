@@ -1,7 +1,7 @@
 import { Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
-const GuessingComponent = ({ sign }) => {
+const GuessingComponent = ({ correctSign, signs }) => {
 
     const [alertVariant, setAlertVariant] = useState("error");
     const [alertMessage, setAlertMessage] = useState("");
@@ -11,16 +11,16 @@ const GuessingComponent = ({ sign }) => {
         setTimeout(() => {
             console.log("Times up")
             console.log(localStorage.getItem("answer"))
-            if(localStorage.getItem("answer")===sign){
+            if(localStorage.getItem("answer")===correctSign){
                 setAlertVariant("success");
-                setAlertMessage("Good job! Correct answer is " + sign);
+                setAlertMessage("Good job! Correct answer is " + correctSign);
             }
             else{
                 setAlertVariant("danger");
-                setAlertMessage("Your answer is incorrect. Correct answer is: " + sign);
+                setAlertMessage("Your answer is incorrect. Correct answer is: " + correctSign);
             }
             localStorage.setItem("answer", "")
-        }, 10000)   
+        }, 10000)  
     }, []);
 
     const onValueChange = (value) => {
@@ -49,39 +49,21 @@ const GuessingComponent = ({ sign }) => {
                     <Row>
                         <Container style={{textAlign:"left", marginLeft:"5em"}}>
                             <form >
-                                <div className="radio">
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="Happy"
-                                            checked={selectedOption === "Happy"}
-                                            onChange={(e) => onValueChange(e.target.value)}
-                                        />
-                                        Happy
-                                    </label>
-                                </div>
-                                <div className="radio">
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="Pain"
-                                            checked={selectedOption === "Pain"}
-                                            onChange={(e) => onValueChange(e.target.value)}
-                                        />
-                                        Pain
-                                    </label>
-                                </div>
-                                <div className="radio">
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="Happy Birthday"
-                                            checked={selectedOption === "Happy Birthday"}
-                                            onChange={(e) => onValueChange(e.target.value)}
-                                        />
-                                        Happy Birthday
-                                    </label>
-                                </div>
+                                {signs.map((sign, i) => {
+                                    return(
+                                        <div className="radio">
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                value={sign}
+                                                checked={selectedOption === sign}
+                                                onChange={(e) => onValueChange(e.target.value)}
+                                            />
+                                            {sign}
+                                        </label>
+                                    </div>
+                                    )
+                                })}
                             </form>
                         </Container>
 
