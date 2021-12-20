@@ -60,6 +60,7 @@ class RecordingPage extends React.Component {
     setTimeout(() => {
       this.setState({
         recordingStopped: true,
+        alertVariant: "info",
         timerInit: "00:00:10"
       })
       //console.log("Recording stopped");
