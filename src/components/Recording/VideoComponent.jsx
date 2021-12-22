@@ -8,7 +8,7 @@ const VideoComponent = ({ videoUrl, name }) => {
         <b>{name}</b>
       </Row>
       <Row>
-        <video controls height='500' width='1500' title={name}>
+        <video controls height='500' width='1500' title={name} loop>
           <source src={window.location.origin + videoUrl +'.mp4'} type='video/mp4' title={name} />
         </video>
 

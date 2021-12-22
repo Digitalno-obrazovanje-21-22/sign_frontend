@@ -1,56 +1,54 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { ReactMediaRecorder, useReactMediaRecorder } from 'react-media-recorder'
 import { Container, Row, Button, Col } from "react-bootstrap";
 import VideoPreview from './VideoPreview';
-import io from "socket.io-client";
-import { v4 as uuid } from 'uuid';
+import AuthContext from '../../store/auth-context';
 
-export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
-  const [socket, setSocket] = useState(null)
+export const RecordingComponent = ({ recording, socket, sign }) => {
+  const authCtx = useContext(AuthContext)
 
   const {
     startRecording,
     stopRecording,
     mediaBlobUrl,
-    previewStream
+    previewStream,
+    status
   } = useReactMediaRecorder({ video: true });
 
   useEffect(() => {
-    if (recordingStarted) {
+    if (recording && status!='recording' ) {
       startRecording()
     }
-    if (recordingStopped) {
+    if (!recording && status!='stopped') {
+      console.log("stopped recording")
       stopRecording();
-      sendMessage();
     }
-  }, [recordingStopped, recordingStarted])
-
-
-  useEffect(() => {
-    const socketConnection = io.connect("http://localhost:3001");
-    function recievedMessage(msg) {
-      console.log("Recieved:");
-      console.log(msg)
-      //Start counter;
-    }
-    
-    socketConnection.on("msgToClient", (msg) => {
-      recievedMessage(msg);
-    })
-    setSocket(socketConnection)
-  }, []);
+    // if(recordingStopped && !!mediaBlobUrl) {
+    //   const func = async () => {
+    //     console.log(mediaBlobUrl)
+    //     const blob = await fetch(mediaBlobUrl).then(r => r.blob)
+    //     console.log(blob)
+    //     const base64Encoded = await blobToBase64(blob)
+    //     console.log(base64Encoded)
+    //     sendMessage(base64Encoded);
+    //   }
+    //   func()
+    // }
+  }, [recording, mediaBlobUrl])
 
   if(socket==null) {
     return null;
   }
 
-  function sendMessage() {
-    const newMessage = {
-      id: uuid(),
-      text: "Start guessing!"
-    }
-    socket.emit("msgToServer", newMessage)
+  function sendMessage(videoBase64) {
+    socket.emit("startGuessing", {token: authCtx.token, guess: mediaBlobUrl, sign})
   }
+
+  const blobToBase64 = (blob) => new Promise((resolve, _) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    })
 
   return (
     <Container>
@@ -62,9 +60,14 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
           </Button>
         </Col>
         <Col>
+        {recording && 
           <ReactMediaRecorder
             className="justify-content-md-center"
             video
+            onStop={(blobUrl, blob) => {
+              console.log("inside on stopped")
+              console.log(blob)
+            }}
             render={() => (
               <Container>
                 <Row>
@@ -73,6 +76,9 @@ export const RecordingComponent = ({ recordingStarted, recordingStopped }) => {
               </Container>
             )}
           />
+        }
+        {!recording && <video src={mediaBlobUrl} width={500} height={500} autoPlay playsInline loop muted/>}
+          
         </Col>
         <Col md="2"></Col>
       </Row>

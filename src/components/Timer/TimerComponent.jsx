@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const TimerComponent = ({timerInit}) => {
+const TimerComponent = ({timerInit, setRecording}) => {
     const Ref = useRef(null);
     const [timer, setTimer] = useState(timerInit || '00:00:00');
 
@@ -17,6 +17,9 @@ const TimerComponent = ({timerInit}) => {
     const startTimer = (e) => {
         let { total, hours, minutes, seconds } 
                     = getTimeRemaining(e);
+        if(total == 0) {
+            setRecording(false)
+        }
         if (total >= 0) {
   
             // update the timer

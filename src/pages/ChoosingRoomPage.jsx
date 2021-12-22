@@ -9,7 +9,7 @@ class ChoosingRoomPage extends React.Component {
     super(props)
     this.state = {
       //TODO: fetch authenticated user
-      userId: 1,
+      userId: localStorage.getItem("userId"),
       rooms: []
     }
   }
@@ -24,7 +24,7 @@ class ChoosingRoomPage extends React.Component {
     })
   }
 
-  joinRoom = (roomId, roomIndex) => {
+  joinRoom = async (roomId, roomIndex) => {
 
     const data = {
       userId: this.state.userId,
@@ -34,12 +34,11 @@ class ChoosingRoomPage extends React.Component {
     }
     localStorage.setItem('roomId', roomId)
     
-    axiosInstance.post(urls.roomParticipantUrl, data).then((response) => {
-        console.log(response.data)
-    })
+    const response = await axiosInstance.post(urls.roomParticipantUrl, data)
 
     //store chosenRoomId in localStorage
     localStorage.setItem("chosenRoomId", roomId);
+    this.props.history.push('/waiting-room')
   }
 
   createRoom = () => {
@@ -90,7 +89,6 @@ class ChoosingRoomPage extends React.Component {
                   <Card.Title>{room.name}</Card.Title>
                   <Card.Text>Number of joined users: {room.roomParticipants.length}/5</Card.Text>
                   <Button
-                    href='/waiting-room'
                     variant='primary'
                     onClick={(roomIndex) => this.joinRoom(room.id, roomIndex)}
                     disabled={room.roomParticipants.length >= 5}

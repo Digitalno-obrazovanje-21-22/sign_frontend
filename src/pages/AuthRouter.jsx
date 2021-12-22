@@ -6,10 +6,13 @@ import { ChoosingRoomPage } from './ChoosingRoomPage'
 import HomePage from './HomePage'
 import LeaderboardPage from './LeaderboardPage'
 import LoginPage from './LoginPage'
-import RecordingPage from './RecordingPage'
+import { RecordingPage } from './RecordingPage'
 import SignUpPage from './SignUpPage'
 import WaitingRoomPage from './WaitingRoomPage'
 import StartGamePage from './StartGamePage'
+import { RoomsPage } from './RoomsPage'
+import { NewWaitingRoomPage } from './NewWaitingRoomPage'
+import { PlayPage } from './PlayPage'
 
 export const AuthRouter = () => {
   //Find authentiacation status
@@ -30,6 +33,12 @@ export const AuthRouter = () => {
           {authCtx.isLoggedIn && <Route path='/choosing-room' component={ChoosingRoomPage} />}
           {authCtx.isLoggedIn && <Route path='/waiting-room' component={WaitingRoomPage} />}
           {authCtx.isLoggedIn && <Route path='/recording-page' component={RecordingPage} />}
+
+          {authCtx.isLoggedIn && <>
+            <Route exact path='/rooms' component={RoomsPage}/>
+            <Route exact path='/rooms/:id' component={NewWaitingRoomPage}/>
+            <Route exact path='/rooms/:id/play' component={PlayPage}/>
+          </>}
 
           <Route path='*'>
             <Redirect to='/' />
