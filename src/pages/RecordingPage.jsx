@@ -60,7 +60,7 @@ class RecordingPage extends React.Component {
     setTimeout(() => {
       this.setState({
         recordingStopped: true,
-        alertVariant: "info",
+        alertVariant: "danger",
         timerInit: "00:00:10"
       })
       //console.log("Recording stopped");
@@ -68,6 +68,7 @@ class RecordingPage extends React.Component {
     setTimeout(() => {
       this.setState({
         guessingStopped: true,
+        alertVariant: "info",
         timerInit: "00:00:05"
       })
     }, 25000)
