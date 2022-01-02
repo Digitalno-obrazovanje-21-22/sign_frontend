@@ -5,6 +5,11 @@ import axios from "axios";
 import { useParams } from "react-router";
 
 const WaitingParticipantsComponent = () => {
+    // const roomCtx = useContext(RoomContext)
+
+    // roomCtx.addToRoom(localStorage.getItem('roomId'))
+    const roomId = localStorage.getItem('chosenRoomId')
+    
     const [users, setUsers] = useState([]);
     const [myInterval, setMyInterval] = useState()
     const { id } = useParams()
@@ -13,6 +18,8 @@ const WaitingParticipantsComponent = () => {
         .then((response) => {
             const myUser = response.data;
             setUsers(myUser);
+            console.log(roomId);
+            console.log(myUser);
         })
     }
     
@@ -36,7 +43,7 @@ const WaitingParticipantsComponent = () => {
               {users.map((user, i ) => {
                   return(
                     <tr>
-                        <td> {user.user.firstName} {user.user.lastName} </td>
+                        <td> {user.user.firstName}  {user.user.lastName} </td>
                     </tr>
                   )
               })}

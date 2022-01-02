@@ -12,7 +12,6 @@ export const PlayPage = () => {
   const [socket, setSocket] = useState(null)
   const [playStep, setPlayStep] = useState(null)
   const { id } = useParams()
-  const history = useHistory()
   const authCtx = useContext(AuthContext)
 
   const { data, error, loading } = useRoomParticipants(id)

@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Col, Container, Row, Spinner, Table } from "react-bootstrap"
+import { Button, Col, Container, Row } from "react-bootstrap"
 import { useHistory, useParams } from "react-router"
 import WaitingParticipantsComponent from "../components/WaitingParticipants/WaitingParticipantsComponent"
 import AuthContext from "../store/auth-context"
 import io from "socket.io-client";
-import { isClassStaticBlockDeclaration } from "typescript"
 
 export const NewWaitingRoomPage = () => {
   const [socket, setSocket] = useState(null)

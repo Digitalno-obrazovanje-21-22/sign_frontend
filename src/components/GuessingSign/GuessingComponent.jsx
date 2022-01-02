@@ -1,26 +1,17 @@
-import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
+import { Container, Row, Alert } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import TimerComponent from "../Timer/TimerComponent";
+import videoPaths from '../../assets/videoPaths'
 const GuessingComponent = ({ videoUrl, socket, token, sign }) => {
-
-    const [answer, setAnswer] = useState();
-    const [allAnswers, setAllAnswers] = useState("");
     const [guessing, setGuessing] = useState(true)
-
-    const setAnswerValue = (text) => {
-        setAnswer(text);
-        console.log(text);
-    }
-
-    const appendAnswer = () => {
-        (allAnswers==="") ? setAllAnswers(answer) : setAllAnswers(allAnswers + "\n" + answer);
-        setAnswer("");
-    }
+    const [selectedOption, setSelectedOption] = useState("something");
+    const [options] = useState([sign, ...videoPaths.map(val => val.name).slice(0,3)])
 
     useEffect(() => {
+        alert(selectedOption == sign ? "Good job! Correct answer is " + sign : "Your answer is incorrect. Correct answer is: " + sign)
         if(!guessing) {
             setTimeout(() => {
-                socket.emit("setPoints", {token, guessed: allAnswers.includes(sign) })
+                socket.emit("setPoints", {token, guessed: selectedOption == sign })
             }, 2000)
         }
     }, [guessing])
@@ -39,19 +30,27 @@ const GuessingComponent = ({ videoUrl, socket, token, sign }) => {
             <Row>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <form >
-                        <input disabled={!guessing} style={{ width: "15em", backgroundColor:"rgb(128, 204, 255, 0.7)", marginBottom:"1em" }} type="text" name="answer" value={answer} onChange={(e) => setAnswerValue(e.target.value)} />
-                        <Button onClick={() => appendAnswer()} size="md" style={{ backgroundColor: "#0099cc", border: "#007399" }}>Send</Button>
+                    {options.map((option, i) => {
+                                    return (
+                                        <div className="radio">
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value={option}
+                                                    checked={selectedOption === option}
+                                                    onChange={(e) => setSelectedOption(e.target.value)}
+                                                />
+                                                {option}
+                                            </label>
+                                        </div>
+                                    )
+                                })}
                     </form>
+                    </div>
 
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <textarea readOnly style={{ width: "18em", height:"10em", backgroundColor:"rgb(128, 204, 255, 0.7)" }} value={allAnswers}></textarea>
-                </div>
+                    </Row>
 
-            </Row>
-
-
-        </Container>
+                </Container>
     )
 }
 
