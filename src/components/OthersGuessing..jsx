@@ -15,7 +15,7 @@ export const OthersGuessing = ({socket, roomId, token}) => {
     <Container>
             <Row>
                 <Alert variant={"Recording"} style={{ textAlign: "center" }}>
-                    <TimerComponent timerInit={"00:00:10"} setRecording={setGuessing}/>
+                    <TimerComponent timerInit={"00:00:15"} setRecording={setGuessing}/>
                 </Alert>
             </Row>
             <Row style={{ textAlign: "center" }}>

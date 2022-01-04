@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router"
+import { useParams } from "react-router"
 import AuthContext from "../store/auth-context"
 import { useRoomParticipants } from "../utils/http"
 import io from "socket.io-client";
@@ -7,6 +7,7 @@ import { Spinner } from "react-bootstrap";
 import { Record } from "../components/Record";
 import GuessingComponent from "../components/GuessingSign/GuessingComponent";
 import { OthersGuessing } from "../components/OthersGuessing.";
+import { GameEndComponent } from "../components/GameEnd/GameEndComponent";
 
 export const PlayPage = () => {
   const [socket, setSocket] = useState(null)
@@ -32,6 +33,12 @@ export const PlayPage = () => {
       socketConnection.on("nextPlayer", index => {
         socketConnection.emit("playGame", {token: authCtx.token, roomId: id, index})
       })
+      socketConnection.on("endRound", leader => {
+        setPlayStep({endGame: leader})
+      })
+      socketConnection.on("endGame", () => {
+        setPlayStep({endGame: -1})
+      })
 
       setSocket(socketConnection)
     }
@@ -50,7 +57,8 @@ export const PlayPage = () => {
       {playStep.othersGuessing && <OthersGuessing socket={socket} roomId={id} token={authCtx.token}/>}
       {playStep.recording && !playStep.othersGuessing && <Record socket={socket}/>}
       {playStep.waiting && <div>{`waiting for ${playStep.user.firstName} ${playStep.user.lastName} to record`}</div>}
-      {playStep.guessing && <GuessingComponent sign={playStep.sign} videoUrl={playStep.guess} socket={socket} sign={playStep.sign}/>}
+      {playStep.guessing && <GuessingComponent sign={playStep.sign} videoUrl={playStep.guess} socket={socket} sign={playStep.sign} token={authCtx.token} roomId={id}/>}
+      {playStep.endGame && <GameEndComponent socket={socket} roomId={id} leader={playStep.endGame} token={authCtx.token}/>}
     </div>
   )
 }

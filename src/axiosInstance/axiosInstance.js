@@ -5,7 +5,9 @@ const axiosInstance = axios.create({
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Expires': '0',
   },
 })
 

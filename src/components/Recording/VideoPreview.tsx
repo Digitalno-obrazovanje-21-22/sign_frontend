@@ -11,7 +11,7 @@ const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
     if (!stream) {
       return null;
     }
-    return <video ref={videoRef} width={500} height={500} autoPlay playsInline loop muted/>;
+    return <video ref={videoRef} width={520} height={480} autoPlay playsInline loop muted/>;
   };
 
   export default VideoPreview;

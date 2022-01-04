@@ -1,20 +1,24 @@
-import { Container, Row, Alert } from "react-bootstrap";
+import { Container, Row, Alert, Toast, ToastHeader, ToastBody } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import TimerComponent from "../Timer/TimerComponent";
 import videoPaths from '../../assets/videoPaths'
-const GuessingComponent = ({ videoUrl, socket, token, sign }) => {
+const GuessingComponent = ({ videoUrl, socket, token, sign, roomId }) => {
     const [guessing, setGuessing] = useState(true)
-    const [selectedOption, setSelectedOption] = useState("something");
-    const [options] = useState([sign, ...videoPaths.map(val => val.name).slice(0,3)])
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [video, setVideo] = useState(null)
+    const [options] = useState([sign, ...videoPaths.filter(val => val.name!=sign).map(val => val.name).slice(0,3)])
 
     useEffect(() => {
-        alert(selectedOption == sign ? "Good job! Correct answer is " + sign : "Your answer is incorrect. Correct answer is: " + sign)
         if(!guessing) {
             setTimeout(() => {
-                socket.emit("setPoints", {token, guessed: selectedOption == sign })
+                socket.emit("setPoints", {token, roomId, guessed: selectedOption === sign })
             }, 2000)
         }
     }, [guessing])
+
+    useEffect(() => {
+        fetch(videoUrl).then(data => data.blob()).then(blob => setVideo(blob))
+    }, [])
 
     return (
         <Container >
@@ -25,7 +29,7 @@ const GuessingComponent = ({ videoUrl, socket, token, sign }) => {
             </Row>
             <Row style={{ textAlign: "center" }}><h4>{guessing ? "Guess the sign!" : "Guessing finished!"}</h4></Row><hr />
             <Row>
-                <video src={videoUrl} width={500} height={500} autoPlay playsInline loop muted/>
+                {!!video && <video src={URL.createObjectURL(video)} width={520} height={480} autoPlay playsInline loop muted/>}
             </Row>
             <Row>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -46,6 +50,14 @@ const GuessingComponent = ({ videoUrl, socket, token, sign }) => {
                                     )
                                 })}
                     </form>
+                    <Toast show={!guessing}>
+                        <ToastHeader>
+                        {selectedOption == sign ? "Correct" : "Incorrect"}
+                        </ToastHeader>
+                        <ToastBody>
+                            {selectedOption == sign ? "Good job! Correct answer is " + sign : "Your answer is incorrect. Correct answer is: " + sign}
+                        </ToastBody>
+                    </Toast>
                     </div>
 
                     </Row>

@@ -16,6 +16,8 @@ export const Record = ({socket}) => {
     return <div>ERROR</div>
   }
 
+  console.log(data)
+
   return (
     <Container style={{ width: "100%", paddingTop: "1em", minHeight: "40em", height: "auto", paddingBottom: "2em", background: "rgb(128, 204, 255, 0.3)" }} className="justify-content-md-center">
       <Row>
