@@ -24,12 +24,28 @@ export const Record = ({ socket }) => {
       {!countTimeToRecord && (
         <Stack>
           <Row>
-            <Alert variant={'Recording'} style={{ textAlign: 'center' }}>
-              <TimerComponent timerInit={'00:00:03'} setRecording={setRecording} />
+            <Alert variant={'Recording'} style={{ justifyContent: 'flex-end' }}>
+              <Stack className='mx-auto' style={{ justifyContent: 'flex-end' }} direction='horizontal' gap={2}>
+                <h3
+                  style={{
+                    alignSelf: 'flex-end',
+                  }}
+                >
+                  {' '}
+                  Recording:{' '}
+                </h3>
+                <TimerComponent
+                  style={{
+                    alignSelf: 'flex-end',
+                  }}
+                  timerInit={'00:00:03'}
+                  setRecording={setRecording}
+                />
+              </Stack>
             </Alert>
           </Row>
 
-          <Container>
+          <Card body>
             <Row style={{ textAlign: 'center' }}>
               <h4>Sign: {data.name}</h4>
               <hr />
@@ -39,17 +55,21 @@ export const Record = ({ socket }) => {
                 <RecordingComponent sign={data.name} socket={socket} recording={recording} />
               </Col>
             </Row>
-          </Container>
+          </Card>
         </Stack>
       )}
       {countTimeToRecord && (
         <Card body style={{ marginTop: '20%', justifyContent: 'flex-end' }}>
-          <Stack  className="mx-auto" style={{ justifyContent: 'flex-end'}} direction='horizontal' gap={2}>
-            <h4  className="me-auto"> You're first in row, we will start recording you in:</h4>
-            <TimerComponent style={{
-               float: 'right',
-               alignSelf: 'flex-end'
-            }} setRecording={setCountTimeToRecord} timerInit={'00:00:05'} />
+          <Stack className='mx-auto' style={{ justifyContent: 'flex-end' }} direction='horizontal' gap={2}>
+            <h4 className='me-auto'> You're first in row, we will start recording you in:</h4>
+            <TimerComponent
+              style={{
+                float: 'right',
+                alignSelf: 'flex-end',
+              }}
+              setRecording={setCountTimeToRecord}
+              timerInit={'00:00:05'}
+            />
           </Stack>
         </Card>
       )}
