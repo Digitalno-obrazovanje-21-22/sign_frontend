@@ -12,9 +12,10 @@ const Layout = ({ children }) => {
   const logoutHandler = () => authCtx.logout()
   const isLoggedIn = authCtx.isLoggedIn
   const isInRoom = roomCtx.apartOfTheGame
-  const [user, setUser] = useState()
-
-  console.log(localStorage)
+  const user = {
+    firstName: localStorage.getItem('firstName'),
+    lastName: localStorage.getItem('lastName'),
+  }
 
   return (
     <div>
@@ -38,7 +39,7 @@ const Layout = ({ children }) => {
                     <Nav.Link>
                       {user.firstName} {user.lastName}
                     </Nav.Link>
-                    <Nav.Link>Score: {!user.score ? '0' : user.score}</Nav.Link>
+                    {/* <Nav.Link>Score: {!user.score ? '0' : user.score}</Nav.Link> */}
                   </>
                 )}
               </>
