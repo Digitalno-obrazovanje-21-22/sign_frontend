@@ -40,9 +40,7 @@ export const RoomsPage = () => {
       </Row>
       <Row>
         <Col>
-          <Button onClick={newRoom} size='lg' style={{ float: 'right',
-        backgroundColor:  'black',
-        color:  '#CAC4B2' }}>
+          <Button onClick={newRoom} size='lg' style={{ float: 'right'}}>
            <h3> Create room</h3>
           </Button>
         </Col>
@@ -57,8 +55,8 @@ export const RoomsPage = () => {
                 marginLeft: '2em',
                 marginTop: '2em',
                 marinRight: '2em',
-                backgroundColor: room.roomParticipants.length >= 5 ? 'black' : '#28415D',
-                color:  room.roomParticipants.length >= 5 ? '#7D8496' : "#CAC4B2"
+                backgroundColor: room.roomParticipants.length >= 5 ? 'rgb(13,110,253,0.2)' : 'white',
+                color:  "black"
               }}
             >
               <Card.Body key={room.id}>
@@ -67,8 +65,6 @@ export const RoomsPage = () => {
                 <Button
                   variant='primary'
                   style={{
-                    backgroundColor: room.roomParticipants.length >= 5 ? "#87909B" : "#B7B5AD",
-                    color: "black",
                     float: 'right'
                   }}
                   onClick={() => {
