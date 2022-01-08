@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
               )}
             </Nav>
             <Nav>
-              {isLoggedIn && (
+              {isLoggedIn && user.firstName && user.lastName && (
                 <Nav.Link style={{ paddingRight: '2em', color: '' }}>
                   {user.firstName.toLocaleUpperCase()} {user.lastName.toLocaleUpperCase()}
                 </Nav.Link>
