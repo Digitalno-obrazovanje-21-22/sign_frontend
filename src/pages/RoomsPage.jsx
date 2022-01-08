@@ -24,7 +24,15 @@ export const RoomsPage = () => {
   }
 
   return (
-    <Container style={{ width: '55em', paddingTop: '1em', paddingBottom: '2em', background: 'rgb(128, 204, 255, 0.3)' }} className='justify-content-md-center'>
+    <Container
+      style={{
+        width: '100%',
+        paddingTop: '1em',
+        paddingBottom: '2em',
+        backgroundPosition: 'center',
+           }}
+      className='justify-content-md-center'
+    >
       <Row>
         <Col style={{ textAlign: 'center' }}>
           <h3>Choose room</h3>
@@ -32,8 +40,8 @@ export const RoomsPage = () => {
       </Row>
       <Row>
         <Col>
-          <Button onClick={newRoom} size='md' style={{ float: 'right' }}>
-            Create room
+          <Button onClick={newRoom} size='lg' style={{ float: 'right'}}>
+           <h3> Create room</h3>
           </Button>
         </Col>
       </Row>
@@ -47,7 +55,8 @@ export const RoomsPage = () => {
                 marginLeft: '2em',
                 marginTop: '2em',
                 marinRight: '2em',
-                backgroundColor: room.roomParticipants.length < 5 ? 'rgb(128, 204, 255, 0.3)' : 'rgb(128, 204, 255)',
+                backgroundColor: room.roomParticipants.length >= 5 ? 'rgb(13,110,253,0.2)' : 'white',
+                color:  "black"
               }}
             >
               <Card.Body key={room.id}>
@@ -55,6 +64,9 @@ export const RoomsPage = () => {
                 <Card.Text>Number of joined users: {room.roomParticipants.length}/5</Card.Text>
                 <Button
                   variant='primary'
+                  style={{
+                    float: 'right'
+                  }}
                   onClick={() => {
                     const permissions = navigator.mediaDevices.getUserMedia({ audio: true, video: true })
                     permissions.then((stream) => {
