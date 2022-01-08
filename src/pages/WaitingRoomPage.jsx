@@ -36,9 +36,9 @@ export const WaitingRoomPage = () => {
   }
 
   return (
-    <Container style={{ width: "60em", height: "auto", minHeight: "30em", background: "rgb(128, 204, 255, 0.3)" }}>
+    <Container style={{ width: "100%",  minHeight: "30em", paddingTop: "5%"  }}>
         <Row>
-            <Col>
+            <Col style={{padding: "5px"}}>
                 <h4>Waiting for other users to join..</h4>
                 <h5>Currently here:</h5>
             </Col>
@@ -50,8 +50,8 @@ export const WaitingRoomPage = () => {
                 </Row>
             </Col>
             <Col>
-            <Button size="md" style={{ float: "right", backgroundColor:"#0099cc", marginLeft:"1em", width:"8em"}} onClick={() => startGame()}>Start game</Button>
-            <Button size="md" style={{float:"right", backgroundColor:"#0099cc", width:"8em"}} onClick={() => leaveRoom()}>Return</Button>
+            <Button size="md" variant="primary" style={{ float: "right", marginLeft:"1em", width:"8em"}} onClick={() => startGame()}>Start game</Button>
+            <Button size="md" variant="primary" style={{float:"right", width:"8em"}} onClick={() => leaveRoom()}>Return</Button>
             </Col>
         </Row>
     </Container>
