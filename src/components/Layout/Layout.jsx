@@ -54,9 +54,7 @@ const Layout = ({ children }) => {
           </Nav>
         </Container>
       </Navbar>
-      <div>
-        <div>{children}</div>
-      </div>
+      <div>{children}</div>
     </div>
   )
 }
