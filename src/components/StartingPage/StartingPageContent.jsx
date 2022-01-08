@@ -22,7 +22,7 @@ const StartingPageContent = () => {
               <Card.Header>Signs</Card.Header>
 
               <div style={{ overflow: 'scroll', height: '652px' }}>
-                <ListGroup>
+                <ListGroup >
                   {videos.map((video) => (
                     <div key={video.url} onClick={() => setActiveVideo(video)}>
                       <ListGroup.Item active={video === activeVideo}>{video.name}</ListGroup.Item>
