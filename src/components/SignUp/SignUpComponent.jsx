@@ -42,7 +42,7 @@ const SignUpComponent = () => {
   }
 
   return (
-    <form>
+    <form className='justify-content-md-center' style={{ width: '25em' }}>
       <h3>Sign Up</h3>
 
       <div className='form-group'>

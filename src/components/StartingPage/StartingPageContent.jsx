@@ -14,14 +14,13 @@ const StartingPageContent = () => {
       <Col style={{ textAlign: 'center' }}>
         <h1>Welcome to Signs!</h1>
       </Col>
-      <Container>
+      <Container className='card'>
         <br />
         <Row>
           <Col lg={4}>
-            <Card>
+            <Card style={{ padding: 0 }}>
               <Card.Header>Signs</Card.Header>
-
-              <div style={{ overflow: 'scroll', height: '652px' }}>
+              <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
                 <ListGroup>
                   {videos.map((video) => (
                     <div key={video.url} onClick={() => setActiveVideo(video)}>
@@ -32,9 +31,11 @@ const StartingPageContent = () => {
               </div>
             </Card>
           </Col>
+
           <Col lg={4} style={{ textAlign: 'center', PaddingRight: '2em', paddingBottom: '2em' }}>
             <VideoComponent key={activeVideo.name} videoUrl={activeVideo.url} name={activeVideo.name}></VideoComponent>
           </Col>
+
           <Col lg={4}>
             <Card style={{ width: '18rem' }}>
               <Card.Body>
