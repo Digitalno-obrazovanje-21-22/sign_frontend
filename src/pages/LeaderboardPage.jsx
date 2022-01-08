@@ -1,13 +1,13 @@
 import React from 'react'
 import Leaderboard from '../components/Leaderboard/Leaderboard'
-import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import { Container, Row} from 'react-bootstrap'
 import { baseUrl, urls } from '../utils/baseUrls'
 import axiosInstance from '../axiosInstance/axiosInstance'
 import './../components/Leaderboard/Leaderboard.css'
 class LeaderboardPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
+    this.state = { 
       users: [],
     }
   }
