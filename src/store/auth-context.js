@@ -30,6 +30,8 @@ const retrieveStoredToken = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('expirationTime')
     localStorage.removeItem('userId')
+    localStorage.removeItem('lastName')
+    localStorage.removeItem('firstName')
     return null
   }
 
@@ -57,6 +59,8 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem('token')
     localStorage.removeItem('expirationTime')
     localStorage.removeItem('userId')
+    localStorage.removeItem('lastName')
+    localStorage.removeItem('firstName')
 
     if (logoutTimer) {
       clearTimeout(logoutTimer)
@@ -70,6 +74,8 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('token', token)
     localStorage.setItem('expirationTime', expirationTime)
     localStorage.setItem('userId', data.id)
+    localStorage.setItem('lastName', data.lastName)
+    localStorage.setItem('firstName', data.firstName)
     setToken(token)
 
     // const remainingTime = calculateRemainingTime(expirationTime)
