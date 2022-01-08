@@ -30,10 +30,7 @@ export const RoomsPage = () => {
         paddingTop: '1em',
         paddingBottom: '2em',
         backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 'url(https://www.pikpng.com/pngl/b/58-589087_lines-png-transparent-clipart.png)',
-      }}
+           }}
       className='justify-content-md-center'
     >
       <Row>
