@@ -23,15 +23,21 @@ const Layout = ({ children }) => {
           <Navbar.Brand href='/'>
             <img src={logo} width='auto' height='30' className='d-inline-block align-top' alt='' />
           </Navbar.Brand>
-          <Nav className='me-auto'>
-            <Nav.Link href='/'>Home</Nav.Link>
-            {isLoggedIn && (
-              <>
-                <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
-                <Nav.Link href='/rooms'>Join room</Nav.Link>
-
-                <Nav.Link onClick={() => logoutHandler()} style={{ paddingLeft: '45em' }}>
-                  Log out
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Collapse id='responsive-navbar-nav'>
+            <Nav className='me-auto'>
+              <Nav.Link href='/'>Home</Nav.Link>
+              {isLoggedIn && (
+                <>
+                  <Nav.Link href='/leaderboard'>Leaderboard</Nav.Link>
+                  <Nav.Link href='/rooms'>Join room</Nav.Link>
+                </>
+              )}
+            </Nav>
+            <Nav>
+              {isLoggedIn && user.firstName && user.lastName && (
+                <Nav.Link style={{ paddingRight: '2em', color: '' }}>
+                  {user.firstName.toLocaleUpperCase()} {user.lastName.toLocaleUpperCase()}
                 </Nav.Link>
                 {isLoggedIn && user && (
                   <>
