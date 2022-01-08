@@ -48,6 +48,7 @@ export const WaitingRoomPage = () => {
         <Col md={7}>
           <Row style={{ textAlign: 'center', marginLeft: '8em' }}>
             <WaitingParticipantsComponent />
+            <Loader guessing={true} />
           </Row>
         </Col>
         <Col>
