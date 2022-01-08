@@ -14,10 +14,7 @@ const Layout = ({ children }) => {
   const isInRoom = roomCtx.apartOfTheGame
   const [user, setUser] = useState()
 
-  isLoggedIn &&
-    axiosInstance.get(urls.userUrl + '/' + localStorage.getItem('userId')).then((response) => {
-      setUser(response.data)
-    })
+  console.log(localStorage)
 
   return (
     <div>
