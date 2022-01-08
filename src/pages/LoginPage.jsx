@@ -1,6 +1,6 @@
 import LoginComponent from '../components/Login/LoginComponent'
 import React from 'react'
-import { Card, Container, Row } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 class LoginPage extends React.Component {
   constructor(props) {
     super(props)
@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <Container className="card loginComponent">
+      <Container className='card loginComponent'>
         <LoginComponent />
       </Container>
     )

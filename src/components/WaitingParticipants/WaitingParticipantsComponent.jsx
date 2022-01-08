@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { baseUrl, urls } from '../../utils/baseUrls'
-import { Table } from 'react-bootstrap'
 import axios from 'axios'
 import { useParams } from 'react-router'
 

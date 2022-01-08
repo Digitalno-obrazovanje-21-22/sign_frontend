@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap'
-
 const VideoComponent = ({ videoUrl, name }) => {
   console.log(window.location.origin + videoUrl)
   return (
