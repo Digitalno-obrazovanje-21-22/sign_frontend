@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import logo from '../../assets/logo2.png'
-import axiosInstance from '../../axiosInstance/axiosInstance'
 import AuthContext from '../../store/auth-context'
 import RoomContext from '../../store/room-context'
 import { urls } from '../../utils/baseUrls'
@@ -11,7 +10,7 @@ const Layout = ({ children }) => {
   const roomCtx = useContext(RoomContext)
   const logoutHandler = () => authCtx.logout()
   const isLoggedIn = authCtx.isLoggedIn
-  const isInRoom = roomCtx.apartOfTheGame
+  // const isInRoom = roomCtx.apartOfTheGame
   const user = {
     firstName: localStorage.getItem('firstName'),
     lastName: localStorage.getItem('lastName'),
