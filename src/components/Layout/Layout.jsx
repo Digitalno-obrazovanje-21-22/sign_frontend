@@ -1,8 +1,10 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import logo from '../../assets/logo2.png'
+import axiosInstance from '../../axiosInstance/axiosInstance'
 import AuthContext from '../../store/auth-context'
 import RoomContext from '../../store/room-context'
+import { urls } from '../../utils/baseUrls'
 
 const Layout = ({ children }) => {
   const authCtx = useContext(AuthContext)
@@ -10,6 +12,13 @@ const Layout = ({ children }) => {
   const logoutHandler = () => authCtx.logout()
   const isLoggedIn = authCtx.isLoggedIn
   const isInRoom = roomCtx.apartOfTheGame
+  const [user, setUser] = useState()
+
+  isLoggedIn &&
+    axiosInstance.get(urls.userUrl + '/' + localStorage.getItem('userId')).then((response) => {
+      setUser(response.data)
+    })
+
   return (
     <div>
       <Navbar bg='dark' variant='dark'>
@@ -27,6 +36,14 @@ const Layout = ({ children }) => {
                 <Nav.Link onClick={() => logoutHandler()} style={{ paddingLeft: '45em' }}>
                   Log out
                 </Nav.Link>
+                {isLoggedIn && user && (
+                  <>
+                    <Nav.Link>
+                      {user.firstName} {user.lastName}
+                    </Nav.Link>
+                    <Nav.Link>Score: {!user.score ? '0' : user.score}</Nav.Link>
+                  </>
+                )}
               </>
             )}
             {!isLoggedIn && (
