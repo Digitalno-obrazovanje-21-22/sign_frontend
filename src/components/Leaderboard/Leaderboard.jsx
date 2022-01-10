@@ -1,5 +1,3 @@
-import { Table } from 'react-bootstrap'
-
 const Leaderboard = ({ users }) => {
   return (
     <div className='row'>
@@ -15,13 +13,16 @@ const Leaderboard = ({ users }) => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, i) => (
-                  <tr key={Math.random()}>
-                    <td>{i}</td>
+                {users.map((user) => {
+                  const totalScore = user.roomParticipants.reduce((acc, val) => acc+val.score, 0)
+                  return {...user, totalScore}
+                }).sort((a, b) => b.totalScore-a.totalScore).map((user, index) => (
+                  <tr key={index}>
+                    <td>{index+1}</td>
                     <td>
                       {user.firstName} {user.lastName}
                     </td>
-                    <td>{user.score}</td>
+                    <td>{user.totalScore}</td>
                   </tr>
                 ))}
               </tbody>

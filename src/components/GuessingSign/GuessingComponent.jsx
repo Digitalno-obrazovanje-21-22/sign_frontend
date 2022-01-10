@@ -11,7 +11,7 @@ const GuessingComponent = ({ videoUrl, socket, token, sign, roomId }) => {
     useEffect(() => {
         if(!guessing) {
             setTimeout(() => {
-                socket.emit("setPoints", {token, roomId, guessed: selectedOption === sign })
+                socket.emit("setPoints", {token, roomId, guessed: selectedOption === sign, sign })
             }, 2000)
         }
     }, [guessing])

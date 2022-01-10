@@ -1,7 +1,6 @@
 import React from 'react'
 import Leaderboard from '../components/Leaderboard/Leaderboard'
 import { Container, Row} from 'react-bootstrap'
-import { baseUrl, urls } from '../utils/baseUrls'
 import axiosInstance from '../axiosInstance/axiosInstance'
 import './../components/Leaderboard/Leaderboard.css'
 class LeaderboardPage extends React.Component {
@@ -17,7 +16,7 @@ class LeaderboardPage extends React.Component {
   }
 
   getUsers = () => {
-    axiosInstance.get(baseUrl + urls.userUrl).then((response) => {
+    axiosInstance.get('/user/leaderboard/all').then((response) => {
       const data = response.data
       this.setState({ users: data })
     })
