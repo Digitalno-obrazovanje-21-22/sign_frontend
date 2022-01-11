@@ -9,6 +9,7 @@ import SignUpPage from './SignUpPage'
 import { RoomsPage } from './RoomsPage'
 import { WaitingRoomPage } from './WaitingRoomPage'
 import { PlayPage } from './PlayPage'
+import { ProfilePage } from './ProfilePage'
 
 export const AuthRouter = () => {
   const authCtx = useContext(AuthContext)
@@ -32,6 +33,7 @@ export const AuthRouter = () => {
               <Route exact path='/rooms/:id' component={WaitingRoomPage}/>
               <Route exact path='/rooms/:id/play' component={PlayPage}/>
               <Route path='/leaderboard' component={LeaderboardPage} />
+              <Route path='/profile' component={ProfilePage} />
             </>
           }
 

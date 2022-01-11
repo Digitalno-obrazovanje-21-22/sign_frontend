@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
                   <Nav.Link href='/sign-up'>Sign up</Nav.Link>
                 </>
               )}
-              {isLoggedIn && <Nav.Link onClick={() => logoutHandler()}>Log out</Nav.Link>}
+              {isLoggedIn && <><Nav.Link href='/profile'>Profile</Nav.Link><Nav.Link onClick={() => logoutHandler()}>Log out</Nav.Link></>}
             </Nav>
           </Navbar.Collapse>
         </Container>
