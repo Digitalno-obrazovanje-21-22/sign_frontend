@@ -10,16 +10,27 @@ const StartingPageContent = () => {
   const isLoggedIn = authCtx.isLoggedIn
   const {data:videos, error, loading} = useSigns()
   const [activeVideo, setActiveVideo] = useState(null)
+  const [myVideos, setMyVideos] = useState([])
 
   useEffect(() => {
     if(!activeVideo && videos) {
-      setActiveVideo(videos[0])
+      const temp = videos.map(val => ({...val, difficulty: val.stats.length ? Math.floor((val.stats.reduce((acc, val) => acc+val.correct, 0)/val.stats.length)*3) : -1}))
+      setMyVideos(temp)
+      setActiveVideo(temp[0])
     }
   }, [videos])
 
   if(loading || !videos || !activeVideo) {
     return <div>loading...</div>
   }
+
+  const difficulty = ['red', 'yellow', 'green']
+  const getDifficulty =(val) => {
+    if(val == -1) return 'blue'
+    if(val == 3) return 'green'
+    return difficulty[val]  
+  }
+  
 
   return (
     <div>
@@ -57,9 +68,9 @@ const StartingPageContent = () => {
               </Card.Body>
             </Card>
             <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>Statistika</Card.Title>
-                <Card.Text>test</Card.Text>
+              <Card.Body style= {{display: 'flex' }}>
+                <Card.Title>Difficulty</Card.Title>
+                <Card.Text style={{marginLeft: 20,width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty)}}></Card.Text>
               </Card.Body>
             </Card>
           </Col>
