@@ -10,8 +10,8 @@ export const Player = ({ srcBlob }) => {
   }
 
   return (
-    <div>
-      <h5>Prewiew of recorded video. Send video to others?</h5>
+    <div style={{ margin: "1em", textAlign: "center" }}>
+      <h5>Preview of recorded video:</h5>
       <video src={URL.createObjectURL(srcBlob)} width={520} height={480} autoPlay playsInline loop muted />
     </div>
   )
@@ -57,39 +57,43 @@ export const RecordingComponent = ({ recording, recordAgain, socket, sign }) => 
     recordAgain()
   }
   return (
-    <Container className='card loginComponent'>
+    <Container className='card' style={{ width: "50%" }}>
       <Row>
         {!recording && <Player srcBlob={mediaBlob} />}
         {recording && <VideoPreview stream={liveStream} />}
       </Row>
 
       <Row>
-        <Button
-          disabled={recording}
-          className='btn btn-block'
-          size='md'
-          variant='primary'
-          onClick={() => sendMessage()}
-          style={{ width: '10em', margin: 'auto' }}
-        >
-          Send video
-        </Button>
-        <br />
-        <Button
-          disabled={recording}
-          className='btn btn-block'
-          variant='primary'
-          href={!!mediaBlob ? URL.createObjectURL(mediaBlob) : ''}
-          download='video_record'
-          style={{ width: '10em', margin: 'auto' }}
-        >
-          Download video
-        </Button>
-        <br />
-        <Button onClick={() => trigerRecordAgain()} disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', margin: 'auto' }}>
-          {/* //TODO: ovdje je potrebno ponoviti snimanje videa */}
-          Record video again?
-        </Button>
+        <Col>
+          <Row>
+            <Button
+              disabled={recording}
+              className='btn btn-block'
+              size='md'
+              variant='primary'
+              onClick={() => sendMessage()}
+              style={{ width: '10em', margin: 'auto' }}
+            >
+              Send to all
+            </Button>
+            <br />
+            <Button
+              disabled={recording}
+              className='btn btn-block'
+              variant='primary'
+              href={!!mediaBlob ? URL.createObjectURL(mediaBlob) : ''}
+              download='video_record'
+              style={{ width: '10em', margin: 'auto' }}
+            >
+              Download
+            </Button>
+            <br />
+            <Button onClick={() => trigerRecordAgain()} disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', margin: 'auto' }}>
+              {/* //TODO: ovdje je potrebno ponoviti snimanje videa */}
+              Record again
+            </Button>
+          </Row>
+        </Col>
       </Row>
     </Container>
   )
