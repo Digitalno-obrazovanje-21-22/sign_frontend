@@ -108,7 +108,7 @@ export const ProfilePage = () => {
                             <Card.Header>Signs</Card.Header>
                             <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
                                 <ListGroup>
-                                    {videos.map((video) => (
+                                    {myVideos.map((video) => (
                                         <div key={video.url} onClick={() => handleSettingActiveVideo(video)}>
                                             <ListGroup.Item active={video === activeVideo}>{video.name}</ListGroup.Item>
                                         </div>
