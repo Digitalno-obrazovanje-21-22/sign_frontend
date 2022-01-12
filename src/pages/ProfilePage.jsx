@@ -19,8 +19,8 @@ export const ProfilePage = () => {
       categories: ['Sign'],
     },
     yaxis: {
-        min: 0,
-        max: 100,
+      min: 0,
+      max: 100,
     },
   })
   const [chartSeries, setChartSeries] = useState([
@@ -59,13 +59,26 @@ export const ProfilePage = () => {
       ])
     }
   }, [activePercentage, activeVideo])
-
+  const calculateDifficulty = (diff) => {
+    if (diff > 0 && diff < 0.1) {
+      return 0
+    }
+    if (diff >= 0.1 && diff < 0.2) {
+      return 1
+    }
+    if (diff >= 0.2 && diff < 0.9) {
+      return 2
+    }
+  }
   useEffect(() => {
     if (!activeVideo && videos) {
       const temp = videos.map((val) => ({
         ...val,
-        difficulty: val.stats.length ? Math.floor((val.stats.reduce((acc, val) => acc + val.correct, 0) / val.stats.length) * 3) : -1,
+        dif: val.stats.reduce((acc, val) => acc + val.correct, 0) / val.stats.length,
+        //difficulty: val.stats.length ? Math.floor((val.stats.reduce((acc, val) => acc + val.correct, 0) / val.stats.length) * 3) : -1,
+        difficulty: val.stats.length ? calculateDifficulty(val.stats.reduce((acc, val) => acc + val.correct, 0) / val.stats.length) : -1,
       }))
+      console.log(temp)
       setMyVideos(temp)
       setActiveVideo(temp[0])
     }
@@ -82,10 +95,21 @@ export const ProfilePage = () => {
     lastName: localStorage.getItem('lastName'),
   }
 
-  const difficulty = ['red', 'yellow', 'green']
-  const getDifficulty = (val) => {
-    if (val == -1) return 'blue'
-    if (val == 3) return 'green'
+  const difficulty = ['red', 'yellow', 'green', 'blue']
+  const getDifficulty = () => {
+    const perc = parseInt(activePercentage) / 100
+    let val = null
+
+    if (perc > 0 && perc < 0.1) {
+      val = 0
+    } else if (perc >= 0.1 && perc < 0.2) {
+      val = 1
+    } else if (perc >= 0.2 && perc < 1) {
+      val = 2
+    } else {
+      val = 4
+    }
+
     return difficulty[val]
   }
 

@@ -37,31 +37,35 @@ export const WaitingRoomPage = () => {
   }
 
   return (
-    <Container style={{ width: '100%', minHeight: '30em', paddingTop: '5%' }}>
-      <Row>
-        <Col style={{ padding: '5px' }}>
-          <h4>Waiting for other users to join..</h4>
-          <h5>Currently here:</h5>
+    <Container style={{ textAlign: 'center', width: '100%', minHeight: '30em' }}>
+      <Row >
+        <Col>
+          <br />
+          <div>
+            <div style={{ textAlign: 'center' }}>
+              <h4>Waiting for other users to join..</h4>
+              <h5>Users currently playing:</h5><br />
+            </div>
+          </div>
+
         </Col>
       </Row>
-      <Row>
-        <Col md={7}>
-          <Row style={{ textAlign: 'center', marginLeft: '8em' }}>
-            <WaitingParticipantsComponent />
-            <Loader guessing={true} />
+      <Row >
+        <Col>
+          <WaitingParticipantsComponent />
+          <Row>
+            <Col>
+              <Button size='md' variant='primary' style={{ marginLeft: '1em', width: '8em' }} onClick={() => startGame()}>
+                Start game
+              </Button>
+              <Button size='md' variant='primary' style={{ marginLeft: '1em', width: '8em' }} onClick={() => leaveRoom()}>
+                Return
+              </Button>
+            </Col>
           </Row>
         </Col>
-        <Col>
-          <Stack direction='vertical' gap={2}>
-            <Button size='md' variant='primary' style={{ float: 'right', marginLeft: '1em', width: '8em' }} onClick={() => startGame()}>
-              Start game
-            </Button>
-            <Button size='md' variant='primary' style={{ float: 'right', marginLeft: '1em', width: '8em' }} onClick={() => leaveRoom()}>
-              Return
-            </Button>
-          </Stack>
-        </Col>
-      </Row>
-    </Container>
+      </Row><br /><br />
+      <Loader guessing={true} />
+    </Container >
   )
 }
