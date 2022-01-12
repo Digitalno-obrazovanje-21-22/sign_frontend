@@ -26,32 +26,35 @@ const WaitingParticipantsComponent = () => {
   }, [])
 
   return (
-    <div class='row'>
-      <div class='col'>
-        <div class='card'>
-          <div class='card-body'>
-            <table class='table'>
-              <thead>
-                <tr>
-                  <th scope='col'>First name</th>
-                  <th scope='col'>Last name</th>
-                  <th scope='col'>Email</th>
-                  <th scope='col'>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, i) => {
-                  return (
-                    <tr key={Math.random()}>
-                      <td>{user.user.firstName}</td>
-                      <td>{user.user.lastName}</td>
-                      <td>{user.user.email}</td>
-                      <td>{user.user.score}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+    <div style={{ justifyContent: "center", display: "flex" }}>
+
+      <div class='row' style={{ textAlign: "center", width: "65%" }}>
+        <div class='col'>
+          <div class='card'>
+            <div class='card-body'>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th scope='col'>First name</th>
+                    <th scope='col'>Last name</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user, i) => {
+                    return (
+                      <tr key={Math.random()}>
+                        <td>{user.user.firstName}</td>
+                        <td>{user.user.lastName}</td>
+                        <td>{user.user.email}</td>
+                        <td>{user.user.score}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
