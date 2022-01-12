@@ -17,10 +17,10 @@ export const Player = ({ srcBlob }) => {
   )
 }
 
-export const RecordingComponent = ({ recording, socket, sign }) => {
+export const RecordingComponent = ({ recording, recordAgain, socket, sign }) => {
   const authCtx = useContext(AuthContext)
 
-  let { status, mediaBlob, stopRecording, startRecording, liveStream } = useMediaRecorder({
+  let { status, mediaBlob, stopRecording, startRecording, liveStream, clearMediaBlob } = useMediaRecorder({
     recordScreen: false,
     blobOptions: { type: 'video/webm' },
     mediaStreamConstraints: { audio: true, video: true },
@@ -29,6 +29,7 @@ export const RecordingComponent = ({ recording, socket, sign }) => {
   useEffect(() => {
     if (recording && status != 'recording') {
       startRecording()
+      console.log('recording started')
     }
     if (!recording && status != 'stopped') {
       console.log('stopped recording')
@@ -51,42 +52,44 @@ export const RecordingComponent = ({ recording, socket, sign }) => {
       socket.emit('startGuessing', { token: authCtx.token, guess: fileReader.result, sign })
     }
   }
-
+  const trigerRecordAgain = () => {
+    clearMediaBlob()
+    recordAgain()
+  }
   return (
-    <Container>
+    <Container className='card loginComponent'>
       <Row>
-        <Col>
-          {!recording && <Player srcBlob={mediaBlob} />}
-          {recording && <VideoPreview stream={liveStream} />}
-        </Col>
-        <Col>
-          <Button
-            disabled={recording}
-            className='btn btn-block'
-            size='md'
-            variant='primary'
-            onClick={() => sendMessage()}
-            style={{ width: '10em', marginBottom: '1em' }}
-          >
-            Send video
-          </Button>
-          <br />
-          <Button
-            disabled={recording}
-            className='btn btn-block'
-            variant='primary'
-            href={!!mediaBlob ? URL.createObjectURL(mediaBlob) : ''}
-            download='video_record'
-            style={{ width: '10em', marginBottom: '1em' }}
-          >
-            Download video
-          </Button>
-          <br />
-          {/* <Button disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', marginBottom: '1em' }}>
-            {/* //TODO: ovdje je potrebno ponoviti snimanje videa */}
-            {/* Record video again?
-          </Button> */}
-        </Col>
+        {!recording && <Player srcBlob={mediaBlob} />}
+        {recording && <VideoPreview stream={liveStream} />}
+      </Row>
+
+      <Row>
+        <Button
+          disabled={recording}
+          className='btn btn-block'
+          size='md'
+          variant='primary'
+          onClick={() => sendMessage()}
+          style={{ width: '10em', margin: 'auto' }}
+        >
+          Send video
+        </Button>
+        <br />
+        <Button
+          disabled={recording}
+          className='btn btn-block'
+          variant='primary'
+          href={!!mediaBlob ? URL.createObjectURL(mediaBlob) : ''}
+          download='video_record'
+          style={{ width: '10em', margin: 'auto' }}
+        >
+          Download video
+        </Button>
+        <br />
+        <Button onClick={() => trigerRecordAgain()} disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', margin: 'auto' }}>
+          {/* //TODO: ovdje je potrebno ponoviti snimanje videa */}
+          Record video again?
+        </Button>
       </Row>
     </Container>
   )
