@@ -7,8 +7,7 @@ export const ProfilePage = () => {
     const { data: videos, error, loading } = useSigns()
     const [activeVideo, setActiveVideo] = useState(null)
     const [myVideos, setMyVideos] = useState([])
-    //TODO: remove hardcoded userId and use one from localStorage
-    const { data: percentages } = usePercentages(1)
+    const { data: percentages } = usePercentages(localStorage.getItem("userId"))
     const [activePercentage, setActivePercentage] = useState(null)
 
     const [chartOptions, setChartOptions] = useState({
