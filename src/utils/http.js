@@ -1,3 +1,4 @@
+import { access } from "fs"
 import axiosInstance from "../axiosInstance/axiosInstance"
 import { useQuery } from "../utils"
 
@@ -7,3 +8,4 @@ export const useRandomSign = () => useQuery(axiosInstance.get('/sign/random'))
 export const useSigns = () => useQuery(axiosInstance.get('/sign'))
 
 export const createRoom = () => axiosInstance.post('/room')
+export const usePercentages = (userId) => useQuery(axiosInstance.get(`/sign/signStats/${userId}`))

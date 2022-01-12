@@ -1,11 +1,24 @@
 import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
-import { useSigns } from '../utils/http'
+import { useSigns, usePercentages } from '../utils/http'
 import { useEffect, useState } from 'react'
 
 export const ProfilePage = () => {
     const { data: videos, error, loading } = useSigns()
     const [activeVideo, setActiveVideo] = useState(null)
     const [myVideos, setMyVideos] = useState([])
+    //TODO: remove hardcoded userId and use one from localStorage
+    const { data: percentages } = usePercentages(1)
+    const [activePercentage, setActivePercentage] = useState(null)
+
+    useEffect(() => {
+        if (percentages) {
+            percentages.filter(percentage => {
+                if (percentage.signId == activeVideo.id) {
+                    setActivePercentage(percentage.percentage)
+                }
+            });
+        }
+    }, [percentages])
 
     useEffect(() => {
         if (!activeVideo && videos) {
@@ -32,6 +45,15 @@ export const ProfilePage = () => {
         return difficulty[val]
     }
 
+    const handleSettingActiveVideo = (video) => {
+        setActiveVideo(video);
+        percentages.filter(percentage => {
+            if (percentage.signId == video.id) {
+                setActivePercentage(percentage.percentage)
+            }
+        });
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
 
@@ -56,7 +78,7 @@ export const ProfilePage = () => {
                             <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
                                 <ListGroup>
                                     {videos.map((video) => (
-                                        <div key={video.url} onClick={() => setActiveVideo(video)}>
+                                        <div key={video.url} onClick={() => handleSettingActiveVideo(video)}>
                                             <ListGroup.Item active={video === activeVideo}>{video.name}</ListGroup.Item>
                                         </div>
                                     ))}
@@ -65,14 +87,17 @@ export const ProfilePage = () => {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        
+                        <Row>
+                            <h5>The Percentage of correct guesses for the sign:</h5>
+                        </Row>
+                        <Row style={{ textAlign: "center" }}>
+                            <Col>{activePercentage}</Col>
+                        </Row>
                     </Col>
                     <Col lg={4}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>{activeVideo.name}</Card.Title>
-                                <Card.Text>Video path: {activeVideo.videoUrl}</Card.Text>
-                                <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                             </Card.Body>
                         </Card>
                         <Card style={{ width: '18rem' }}>
