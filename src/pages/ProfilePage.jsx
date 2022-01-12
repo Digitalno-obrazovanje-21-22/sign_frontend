@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Container, Row, Col, Card, ListGroup, Stack } from 'react-bootstrap'
 import { useSigns, usePercentages } from '../utils/http'
 import { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
@@ -155,28 +155,38 @@ export const ProfilePage = () => {
               </div>
             </Card>
           </Col>
-          <Col lg={5}>
-            <Row>
-              <h5>The Percentage of correct guesses for the sign:</h5>
-            </Row>
-            <Row style={{ textAlign: 'center' }}>
-              <Col>{activePercentage} %</Col>
-            </Row>
-            <br />
-            <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='bar' width={450} height={630} /> : null}</Row>
-          </Col>
-          <Col lg={3}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>{activeVideo.name}</Card.Title>
-              </Card.Body>
-            </Card>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body style={{ display: 'flex' }}>
-                <Card.Title>Difficulty</Card.Title>
-                <Card.Text style={{ marginLeft: 20, width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty) }}></Card.Text>
-              </Card.Body>
-            </Card>
+        <Col>
+          {activePercentage && (
+            <Stack direction="horizontal" gap={2}>
+              <Col >
+                <Row>
+                  <h5>The Percentage of correct guesses for the sign:</h5>
+                </Row>
+                <Row style={{ textAlign: 'center' }}>
+                  <Col>{activePercentage} %</Col>
+                </Row>
+                <br />
+                <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='bar' width={450} height={630} /> : null}</Row>
+              </Col>
+              <Col >
+                <Card style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title>{activeVideo.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+                <Card style={{ width: '18rem' }}>
+                  <Card.Body style={{ display: 'flex' }}>
+                    <Card.Title>Difficulty</Card.Title>
+                    <Card.Text style={{ marginLeft: 20, width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty) }}></Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Stack>
+          )}
+          {!activePercentage && (
+              <div style={{marginTop:"25%"}}><Loader /></div>
+              
+          )}
           </Col>
         </Row>
       </Container>
