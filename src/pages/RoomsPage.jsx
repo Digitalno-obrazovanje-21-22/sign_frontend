@@ -46,7 +46,7 @@ export const RoomsPage = () => {
         </Col>
       </Row>
       <Row>
-        {rooms.map((room, roomIndex) => {
+        {rooms.filter((room) => room.isOver === false).map((room, roomIndex) => {
           return (
             <Card
               key={roomIndex}
