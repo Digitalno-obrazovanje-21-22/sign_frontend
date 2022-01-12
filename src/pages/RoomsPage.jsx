@@ -4,7 +4,6 @@ import { createRoom, useRooms } from '../utils/http'
 
 export const RoomsPage = () => {
   const { data: rooms, error, loading } = useRooms({ refetch: true })
-  const listOfAvailableRooms = rooms.filter((room) => room.isOver === false)
   const history = useHistory()
 
   const newRoom = async () => {
@@ -47,7 +46,7 @@ export const RoomsPage = () => {
         </Col>
       </Row>
       <Row>
-        {listOfAvailableRooms.map((room, roomIndex) => {
+        {rooms.map((room, roomIndex) => {
           return (
             <Card
               key={roomIndex}
