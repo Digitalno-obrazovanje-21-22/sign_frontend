@@ -69,7 +69,7 @@ export const GameEndComponent = ({ roomId, socket, leader, token }) => {
             </>
           ) : null}
           {leader == localStorage.getItem('userId') && (
-            <Row style={{ textAlign: 'center' }}>
+            <Row style={{ textAlign: 'center', justifyContent:'center' }}>
               <Button
                 size='md'
                 style={{ backgroundColor: '#0099cc', marginRight: '1em', width: '8em' }}
