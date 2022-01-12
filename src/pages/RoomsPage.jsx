@@ -35,7 +35,7 @@ export const RoomsPage = () => {
     >
       <Row>
         <Col style={{ textAlign: 'center' }}>
-          <h3>Choose room</h3>
+          <h3>Choose or create room to start a game</h3>
         </Col>
       </Row>
       <Row>
@@ -61,7 +61,7 @@ export const RoomsPage = () => {
             >
               <Card.Body key={room.id}>
                 <Card.Title>{room.name}</Card.Title>
-                <Card.Text>Number of joined users: {room.roomParticipants.length}/5</Card.Text>
+                <Card.Text>Players in room: {room.roomParticipants.length}/5</Card.Text>
                 <Button
                   variant='primary'
                   style={{
