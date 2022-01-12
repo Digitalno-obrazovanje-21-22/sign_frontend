@@ -1,6 +1,7 @@
 import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
 import { useSigns, usePercentages } from '../utils/http'
 import { useEffect, useState } from 'react'
+import Chart from 'react-apexcharts'
 
 export const ProfilePage = () => {
     const { data: videos, error, loading } = useSigns()
@@ -9,6 +10,19 @@ export const ProfilePage = () => {
     //TODO: remove hardcoded userId and use one from localStorage
     const { data: percentages } = usePercentages(1)
     const [activePercentage, setActivePercentage] = useState(null)
+
+    const [chartOptions, setChartOptions] = useState({
+        chart: {
+            id: 'apexchart-example'
+        },
+        xaxis: {
+            categories: ["Sign"]
+        }
+    })
+    const [chartSeries, setChartSeries] = useState([{
+        name: 'sign1',
+        data: [50]
+    }])
 
     useEffect(() => {
         if (percentages) {
@@ -19,6 +33,24 @@ export const ProfilePage = () => {
             });
         }
     }, [percentages])
+
+    //update chart
+    useEffect(() => {
+        if (activePercentage && activeVideo) {
+            setChartOptions({
+                chart: {
+                    id: 'apexchart-example'
+                },
+                xaxis: {
+                    categories: [activeVideo.name]
+                }
+            });
+            setChartSeries([{
+                name: activeVideo.name,
+                data: [activePercentage]
+            }])
+        }
+    }, [activePercentage, activeVideo])
 
     useEffect(() => {
         if (!activeVideo && videos) {
@@ -57,7 +89,7 @@ export const ProfilePage = () => {
     return (
         <div style={{ textAlign: "center" }}>
 
-            <Container className='card' style={{ marginLeft: "15em", marginRight: "3em", marginTop: "3em" }}>
+            <Container className='card' style={{ marginLeft: "10em", marginRight: "3em", marginTop: "3em" }}>
                 <Row style={{ textAlign: "left" }}>
                     <Col md={4}>
                         <Row>
@@ -86,15 +118,19 @@ export const ProfilePage = () => {
                             </div>
                         </Card>
                     </Col>
-                    <Col lg={4}>
+                    <Col lg={5}>
                         <Row>
                             <h5>The Percentage of correct guesses for the sign:</h5>
                         </Row>
                         <Row style={{ textAlign: "center" }}>
-                            <Col>{activePercentage}</Col>
+                            <Col>{activePercentage} %</Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                            {activePercentage ? <Chart options={chartOptions} series={chartSeries} type="bar" width={450} height={400} /> : null}
                         </Row>
                     </Col>
-                    <Col lg={4}>
+                    <Col lg={3}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>{activeVideo.name}</Card.Title>
