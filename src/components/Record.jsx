@@ -52,7 +52,7 @@ export const Record = ({ socket }) => {
           )}
           <Card body>
             <Row style={{ textAlign: 'center' }}>
-              <h4>Sign: {data.name}</h4>
+              <h4>Sign this phrase: {data.name}</h4>
               <hr />
             </Row>
             <Row>

@@ -44,7 +44,7 @@ export const WaitingRoomPage = () => {
           <div>
             <div style={{ textAlign: 'center' }}>
               <h4>Waiting for other users to join..</h4>
-              <h5>Users currently playing:</h5><br />
+              <h5 style={{marginTop: "5%"}}>Users currently playing:</h5><br />
             </div>
           </div>
 

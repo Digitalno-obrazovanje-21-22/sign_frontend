@@ -25,10 +25,10 @@ export const GameEndComponent = ({ roomId, socket, leader, token }) => {
   return (
     <Container>
       <Row>
-        <Container style={{ marginTop: "10%", width: '70%', padding: '2em' }}>
+        <Container style={{ marginTop:"10%", width: '70%', padding: '2em' }}>
           <Row style={{ textAlign: 'center' }}>
             <Col>
-              <h3>{leader == -1 ? 'Game end' : 'Round end'}</h3>{' '}
+              <h3>{leader == -1 ? 'Game end' : 'End round'}</h3>{' '}
             </Col>
             <br />
           </Row>
@@ -70,19 +70,16 @@ export const GameEndComponent = ({ roomId, socket, leader, token }) => {
           ) : null}
           {leader == localStorage.getItem('userId') && (
             <Row style={{ textAlign: 'center' }}>
-              <Col md={{offset:7}}>
-                <Button
-                  size='md'
-                  style={{ backgroundColor: '#0099cc', marginRight: '1em', width: '8em' }}
-                  onClick={() => socket.emit('playGame', { token, roomId })}
-                >
-                  Next round
-                </Button>
-                <Button size='md' style={{ backgroundColor: '#0099cc', width: '8em' }} onClick={() => socket.emit('endGame', { roomId })}>
-                  End game
-                </Button>
-              </Col>
-
+              <Button
+                size='md'
+                style={{ backgroundColor: '#0099cc', marginRight: '1em', width: '8em' }}
+                onClick={() => socket.emit('playGame', { token, roomId })}
+              >
+                Next round
+              </Button>
+              <Button size='md' style={{ backgroundColor: '#0099cc', width: '8em' }} onClick={() => socket.emit('endGame', { roomId })}>
+                End game
+              </Button>
             </Row>
           )}
           {leader == -1 && (

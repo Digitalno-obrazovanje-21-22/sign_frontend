@@ -5,6 +5,7 @@ import VideoComponent from '../Recording/VideoComponent'
 import AuthContext from '../../store/auth-context'
 import videosPath from '../../assets/videoPaths'
 import { useSigns } from '../../utils/http'
+import Loader from '../LoaderClip/Loader'
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext)
   const isLoggedIn = authCtx.isLoggedIn
@@ -21,7 +22,7 @@ const StartingPageContent = () => {
   }, [videos])
 
   if(loading || !videos || !activeVideo) {
-    return <div>loading...</div>
+    return <div style={{marginTop:"25%"}}><Loader /></div>
   }
 
   const difficulty = ['red', 'yellow', 'green']
