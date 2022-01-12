@@ -82,10 +82,10 @@ export const RecordingComponent = ({ recording, socket, sign }) => {
             Download video
           </Button>
           <br />
-          <Button disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', marginBottom: '1em' }}>
+          {/* <Button disabled={recording} className='btn btn-block' variant='primary' style={{ width: '10em', marginBottom: '1em' }}>
             {/* //TODO: ovdje je potrebno ponoviti snimanje videa */}
-            Record video again?
-          </Button>
+            {/* Record video again?
+          </Button> */}
         </Col>
       </Row>
     </Container>
