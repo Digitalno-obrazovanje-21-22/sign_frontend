@@ -2,6 +2,7 @@ import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { useSigns, usePercentages } from '../utils/http'
 import { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
+import Loader from '../components/LoaderClip/Loader'
 
 export const ProfilePage = () => {
   const { data: videos, error, loading } = useSigns()
@@ -71,7 +72,8 @@ export const ProfilePage = () => {
   }, [videos])
 
   if (loading || !videos || !activeVideo) {
-    return <div>loading...</div>
+    //return <div>loading...</div>
+    return <div style={{marginTop:"20%"}}> <Loader /> </div>
   }
 
   const user = {
