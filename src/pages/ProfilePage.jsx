@@ -144,7 +144,7 @@ export const ProfilePage = () => {
           <Col lg={4}>
             <Card style={{ padding: 0 }}>
               <Card.Header>Signs</Card.Header>
-              <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
+              {/* <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
                 <ListGroup>
                   {myVideos.map((video) => (
                     <div key={video.url} onClick={() => handleSettingActiveVideo(video)}>
@@ -152,41 +152,65 @@ export const ProfilePage = () => {
                     </div>
                   ))}
                 </ListGroup>
+              </div> */}
+              <div style={{ overflowY: 'scroll', height: '650px' }}>
+                <ListGroup>
+                  <Row>
+                    {myVideos.map((video) => (
+                      <div key={video.url} className='col-sm-4' style={{ marginBottom: '9px', justifyContent: 'flex' }} onClick={() => handleSettingActiveVideo(video)}>
+                        <ListGroup.Item
+                          className='card'
+                          style={{
+                            height: '100%',
+                            padding: '5px',
+                            justifyContent: 'center',
+                            backgroundColor: video === activeVideo ? 'rgb(0,123,255)' : 'rgb(13,110,253,0.05)',
+                          }}
+                          action
+                          active={video === activeVideo}
+                        >
+                          {video.name}
+                        </ListGroup.Item>
+                      </div>
+                    ))}
+                  </Row>
+                </ListGroup>
               </div>
             </Card>
           </Col>
-        <Col>
-          {activePercentage && (
-            <Stack direction="horizontal" gap={2}>
-              <Col >
-                <Row>
-                  <h5>The Percentage of correct guesses for the sign:</h5>
-                </Row>
-                <Row style={{ textAlign: 'center' }}>
-                  <Col>{activePercentage} %</Col>
-                </Row>
-                <br />
-                <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='bar' width={450} height={630} /> : null}</Row>
-              </Col>
-              <Col >
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>{activeVideo.name}</Card.Title>
-                  </Card.Body>
-                </Card>
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body style={{ display: 'flex' }}>
-                    <Card.Title>Difficulty</Card.Title>
-                    <Card.Text style={{ marginLeft: 20, width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty) }}></Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Stack>
-          )}
-          {!activePercentage && (
-              <div style={{marginTop:"25%"}}><Loader /></div>
-              
-          )}
+          <Col>
+            {activePercentage && (
+              <Stack direction='horizontal' gap={2}>
+                <Col>
+                  <Row>
+                    <h5>The Percentage of correct guesses for the sign:</h5>
+                  </Row>
+                  <Row style={{ textAlign: 'center' }}>
+                    <Col>{activePercentage} %</Col>
+                  </Row>
+                  <br />
+                  <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='bar' width={450} height={630} /> : null}</Row>
+                </Col>
+                <Col>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                      <Card.Title>{activeVideo.name}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Body style={{ display: 'flex' }}>
+                      <Card.Title>Difficulty</Card.Title>
+                      <Card.Text style={{ marginLeft: 20, width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty) }}></Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Stack>
+            )}
+            {!activePercentage && (
+              <div style={{ marginTop: '25%' }}>
+                <Loader />
+              </div>
+            )}
           </Col>
         </Row>
       </Container>
