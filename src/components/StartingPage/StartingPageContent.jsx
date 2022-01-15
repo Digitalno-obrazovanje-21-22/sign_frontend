@@ -35,24 +35,26 @@ const StartingPageContent = () => {
   
 
   return (
-    <div>
+    <div style={{width:'100%'}}>
       <Col style={{ textAlign: 'center' }}>
         <h1>Welcome to Signs!</h1>
       </Col>
-      <Container className='card'>
+      <Container className='card'  >
         <br />
         <Row>
           <Col lg={4}>
             <Card style={{ padding: 0 }}>
               <Card.Header>Signs</Card.Header>
-              <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
-                <ListGroup>
-                  {myVideos.map((video) => (
-                    <div key={video.url} onClick={() => setActiveVideo(video)}>
-                      <ListGroup.Item active={video === activeVideo}>{video.name}</ListGroup.Item>
+              <div style={{  overflowY: 'scroll', height: '650px' }}>
+                <ListGroup >
+                  <Row>
+                  {myVideos.map((video, index) => (
+                    <div key={video.url} className="col-sm-4" style={{marginBottom:'9px', justifyContent:'flex'}} onClick={() => setActiveVideo(video)}>
+                      <ListGroup.Item className='card' style={{height:'100%',padding:'5px', justifyContent:'center', backgroundColor:video === activeVideo ? 'rgb(0,123,255)':'rgb(13,110,253,0.05)'}} action active={video === activeVideo}>{video.name}</ListGroup.Item>
                     </div>
                   ))}
-                </ListGroup>
+                  </Row>
+                </ListGroup> 
               </div>
             </Card>
           </Col>
