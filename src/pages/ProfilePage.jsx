@@ -86,7 +86,7 @@ export const ProfilePage = () => {
 
   if (loading || !videos || !activeVideo) {
     //return <div>loading...</div>
-    return <div style={{marginTop:"20%"}}> <Loader /> </div>
+    return <div style={{ marginTop: "20%" }}> <Loader /> </div>
   }
 
   const user = {
@@ -143,40 +143,21 @@ export const ProfilePage = () => {
         <Row>
           <Col lg={4}>
             <Card style={{ padding: 0 }}>
-              <Card.Header>Signs</Card.Header>
-              {/* <div style={{ objectFit: 'fill', overflowY: 'scroll', height: '650px' }}>
-                <ListGroup>
-                  {myVideos.map((video) => (
-                    <div key={video.url} onClick={() => handleSettingActiveVideo(video)}>
-                      <ListGroup.Item active={video === activeVideo}>{video.name}</ListGroup.Item>
-                    </div>
-                  ))}
-                </ListGroup>
-              </div> */}
-              <div style={{ overflowY: 'scroll', height: '650px' }}>
-                <ListGroup>
+              <Card.Header><b>Signs</b></Card.Header>
+              <Card.Body></Card.Body>
+              <div style={{ marginLeft: "1em", marginRight: "1em" }}>
+                <ListGroup >
                   <Row>
-                    {myVideos.map((video) => (
-                      <div key={video.url} className='col-sm-4' style={{ marginBottom: '9px', justifyContent: 'flex' }} onClick={() => handleSettingActiveVideo(video)}>
-                        <ListGroup.Item
-                          className='card'
-                          style={{
-                            height: '100%',
-                            padding: '5px',
-                            justifyContent: 'center',
-                            backgroundColor: video === activeVideo ? 'rgb(0,123,255)' : 'rgb(13,110,253,0.05)',
-                          }}
-                          action
-                          active={video === activeVideo}
-                        >
-                          {video.name}
-                        </ListGroup.Item>
+                    {myVideos.map((video, index) => (
+                      <div key={video.url} className="col-sm-4" style={{ marginBottom: '1em', height: "100px" }} onClick={() => handleSettingActiveVideo(video)}>
+                        <div className='card' style={{ textAlign: "center", height: '100%', backgroundColor: video === activeVideo ? 'rgb(0,123,255)' : 'rgb(13,110,253,0.05)' }} action active={video === activeVideo}>{video.name}</div>
                       </div>
                     ))}
                   </Row>
                 </ListGroup>
               </div>
             </Card>
+            
           </Col>
           <Col>
             {activePercentage && (

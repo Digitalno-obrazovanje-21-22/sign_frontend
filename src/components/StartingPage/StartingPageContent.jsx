@@ -44,13 +44,14 @@ const StartingPageContent = () => {
         <Row>
           <Col lg={4}>
             <Card style={{ padding: 0 }}>
-              <Card.Header>Signs</Card.Header>
-              <div style={{  overflowY: 'scroll', height: '650px' }}>
+              <Card.Header><b>Signs</b></Card.Header>
+              <Card.Body></Card.Body>
+              <div style={{ marginLeft:"1em",  marginRight:"1em" }}>
                 <ListGroup >
                   <Row>
                   {myVideos.map((video, index) => (
-                    <div key={video.url} className="col-sm-4" style={{marginBottom:'9px', justifyContent:'flex'}} onClick={() => setActiveVideo(video)}>
-                      <ListGroup.Item className='card' style={{height:'100%',padding:'5px', justifyContent:'center', backgroundColor:video === activeVideo ? 'rgb(0,123,255)':'rgb(13,110,253,0.05)'}} action active={video === activeVideo}>{video.name}</ListGroup.Item>
+                    <div key={video.url} className="col-sm-4" style={{ marginBottom:'1em', height: "100px"}} onClick={() => setActiveVideo(video)}>
+                      <div className='card' style={{textAlign:"center", height:'100%', backgroundColor:video === activeVideo ? 'rgb(0,123,255)':'rgb(13,110,253,0.05)'}} action active={video === activeVideo}>{video.name}</div>
                     </div>
                   ))}
                   </Row>
