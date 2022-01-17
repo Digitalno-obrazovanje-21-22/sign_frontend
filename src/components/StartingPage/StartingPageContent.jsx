@@ -43,7 +43,7 @@ const StartingPageContent = () => {
         <br />
         <Row>
           <Col lg={4}>
-            <Card style={{ padding: 0 }}>
+            <Card style={{ padding: 0, cursor:"pointer" }}>
               <Card.Header><b>Signs</b></Card.Header>
               <Card.Body></Card.Body>
               <div style={{ marginLeft:"1em",  marginRight:"1em" }}>
