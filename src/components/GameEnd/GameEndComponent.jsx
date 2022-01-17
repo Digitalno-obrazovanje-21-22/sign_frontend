@@ -83,8 +83,8 @@ export const GameEndComponent = ({ roomId, socket, leader, token }) => {
             </Row>
           )}
           {leader == -1 && (
-            <Row style={{ textAlign: 'center' }}>
-              <Button size='md' style={{ backgroundColor: '#0099cc', marginRight: '1em', width: '8em' }} onClick={() => history.push('/rooms')}>
+            <Row style={{ textAlign: 'center', justifyContent:"center"}}>
+              <Button size='md' style={{ backgroundColor: '#0099cc', width: '8em' }} onClick={() => history.push('/rooms')}>
                 Back to room selection
               </Button>
             </Row>
