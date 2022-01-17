@@ -15,7 +15,9 @@ const StartingPageContent = () => {
 
   useEffect(() => {
     if(!activeVideo && videos) {
-      const temp = videos.map(val => ({...val, difficulty: val.stats.length ? Math.floor((val.stats.reduce((acc, val) => acc+val.correct, 0)/val.stats.length)*3) : -1}))
+      let temp = videos.map(val => ({...val, difficulty: val.stats.length ? val.stats.reduce((acc, val) => acc+val.correct, 0)*100/val.stats.length : -1}))
+      temp = temp.map(val => ({...val, difficulty: val.difficulty > 70 ? 2 : val.difficulty > 40 ? 1 : val.difficulty >=0 ? 0 : -1}))
+      console.log(temp)
       setMyVideos(temp)
       setActiveVideo(temp[0])
     }

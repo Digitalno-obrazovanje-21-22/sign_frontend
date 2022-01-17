@@ -15,20 +15,9 @@ export const ProfilePage = () => {
     chart: {
       id: 'apexchart-example',
     },
-    xaxis: {
-      categories: ['Sign'],
-    },
-    yaxis: {
-      min: 0,
-      max: 100,
-    },
+    labels: ['Correct', 'Incorrect']
   })
-  const [chartSeries, setChartSeries] = useState([
-    {
-      name: 'sign1',
-      data: [50],
-    },
-  ])
+  const [chartSeries, setChartSeries] = useState([50, 50])
 
   useEffect(() => {
     if (percentages) {
@@ -47,16 +36,9 @@ export const ProfilePage = () => {
         chart: {
           id: 'apexchart-example',
         },
-        xaxis: {
-          categories: [activeVideo.name],
-        },
+        labels: ['Correct', 'Incorrect']
       })
-      setChartSeries([
-        {
-          name: activeVideo.name,
-          data: [activePercentage],
-        },
-      ])
+      setChartSeries([parseFloat(activePercentage), 100-parseFloat(activePercentage)])
     }
   }, [activePercentage, activeVideo])
   const calculateDifficulty = (diff) => {
@@ -170,7 +152,7 @@ export const ProfilePage = () => {
                     <Col>{activePercentage} %</Col>
                   </Row>
                   <br />
-                  <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='bar' width={450} height={630} /> : null}</Row>
+                  <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='pie' width={450} height={630} /> : null}</Row>
                 </Col>
                 <Col>
                   <Card style={{ width: '18rem' }}>
