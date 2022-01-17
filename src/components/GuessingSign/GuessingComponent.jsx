@@ -6,7 +6,25 @@ const GuessingComponent = ({ videoUrl, socket, token, sign, roomId }) => {
     const [guessing, setGuessing] = useState(true)
     const [selectedOption, setSelectedOption] = useState(null);
     const [video, setVideo] = useState(null)
-    const [options] = useState([sign, ...videoPaths.filter(val => val.name != sign).map(val => val.name).slice(0, 3)])
+    const [options, setOptions] = useState([sign, ...videoPaths.filter(val => val.name != sign).map(val => val.name).slice(0, 3)])
+
+    const shuffle= (array)=> {
+        let currentIndex = array.length,  randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+      
+        return array;
+    }
 
     useEffect(() => {
         if (!guessing) {
@@ -19,6 +37,10 @@ const GuessingComponent = ({ videoUrl, socket, token, sign, roomId }) => {
     useEffect(() => {
         fetch(videoUrl).then(data => data.blob()).then(blob => setVideo(blob))
     }, [])
+
+    useEffect(() => {
+        shuffle(options)
+    }, [options])
 
     return (
         <Container >
