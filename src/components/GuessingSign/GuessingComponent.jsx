@@ -39,7 +39,7 @@ const GuessingComponent = ({ videoUrl, socket, token, sign, roomId }) => {
     }, [])
 
     useEffect(() => {
-        shuffle(options)
+        setOptions(shuffle(options))
     }, [options])
 
     return (
