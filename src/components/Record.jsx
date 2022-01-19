@@ -51,7 +51,7 @@ export const Record = ({ socket }) => {
               </Alert>
             </Row>
           )}
-          <Card body>
+          <Card body style={{marginTop:recording ? '0' : '7%'}}>
             <Row style={{ textAlign: 'center' }}>
               <h4>Sign this phrase: {data.name}</h4>
               <hr />
