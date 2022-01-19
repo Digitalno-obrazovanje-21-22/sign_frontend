@@ -151,7 +151,10 @@ export const ProfilePage = () => {
                   <Row style={{ textAlign: 'center' }}>
                     <Col>{activePercentage} %</Col>
                   </Row>
-                  <br />
+                  <br />      
+                  <br/>
+                  <br/>
+                  <br/>
                   <Row>{activePercentage ? <Chart options={chartOptions} series={chartSeries} type='pie' width={450} height={630} /> : null}</Row>
                 </Col>
                 <Col>
