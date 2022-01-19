@@ -18,7 +18,7 @@ export const Record = ({ socket }) => {
   }
 
   const recordAgain = () => {
-    setTimer('00:00:05')
+    setTimer('00:00:04')
     setRecording(true)
   }
   console.log(data)
@@ -33,6 +33,7 @@ export const Record = ({ socket }) => {
                 <Stack className='mx-auto' style={{ justifyContent: 'flex-end' }} direction='horizontal' gap={2}>
                   <h3
                     style={{
+                      marginLeft:'40%',
                       alignSelf: 'flex-end',
                     }}
                   >
