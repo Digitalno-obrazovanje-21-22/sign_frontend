@@ -114,11 +114,11 @@ export const ProfilePage = () => {
                 <label>Username:</label> {user.firstName + ' ' + user.lastName}
               </Col>
             </Row>
-            <Row>
+            {/*<Row>
               <Col>
                 <label>Score:</label>
               </Col>
-            </Row>
+            </Row>*/}
           </Col>
         </Row>
         <br />
