@@ -10,6 +10,7 @@ import { RoomsPage } from './RoomsPage'
 import { WaitingRoomPage } from './WaitingRoomPage'
 import { PlayPage } from './PlayPage'
 import { ProfilePage } from './ProfilePage'
+import AboutPage from './AboutPage'
 
 export const AuthRouter = () => {
   const authCtx = useContext(AuthContext)
@@ -19,7 +20,7 @@ export const AuthRouter = () => {
       <Layout>
         <Switch>
           <Route path='/' exact component={HomePage} />
-
+          <Route exact pasth="/about" component={AboutPage}></Route>
           {!authCtx.isLoggedIn && 
             <>
               <Route path='/sign-in' component={LoginPage} />
