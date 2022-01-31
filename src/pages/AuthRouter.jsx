@@ -20,7 +20,7 @@ export const AuthRouter = () => {
       <Layout>
         <Switch>
           <Route path='/' exact component={HomePage} />
-          <Route exact pasth="/about" component={AboutPage}></Route>
+          <Route exact path="/about" component={AboutPage}></Route>
           {!authCtx.isLoggedIn && 
             <>
               <Route path='/sign-in' component={LoginPage} />
