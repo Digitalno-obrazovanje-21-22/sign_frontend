@@ -1,4 +1,4 @@
-import { Button, Card, Col, Container, Dropdown, ListGroup, Nav, Row, Tab } from 'react-bootstrap'
+import { Button, Card, Col, Container, Dropdown, ListGroup, Modal, Nav, Row, Tab } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import VideoComponent from '../Recording/VideoComponent'
@@ -6,6 +6,8 @@ import AuthContext from '../../store/auth-context'
 import videosPath from '../../assets/videoPaths'
 import { useSigns } from '../../utils/http'
 import Loader from '../LoaderClip/Loader'
+import HowToPlay from '../InstructionsComponent/HowToPlay'
+
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext)
   const isLoggedIn = authCtx.isLoggedIn
@@ -33,31 +35,39 @@ const StartingPageContent = () => {
     if(val == 3) return 'green'
     return difficulty[val]  
   }
-
-  
+ 
 
   return (
-    <div style={{width:'100%'}}>
+    <div style={{ width: '100%' }}>
       <Col style={{ textAlign: 'center' }}>
         <h1>Welcome to Signs!</h1>
       </Col>
-      <Container className='card'  >
+      <Container className='card'>
         <br />
         <Row>
           <Col lg={4}>
-            <Card style={{ padding: 0, cursor:"pointer" }}>
-              <Card.Header><b>Signs</b></Card.Header>
+            <Card style={{ padding: 0, cursor: 'pointer' }}>
+              <Card.Header>
+                <b>Signs</b>
+              </Card.Header>
               <Card.Body></Card.Body>
-              <div style={{ marginLeft:"1em",  marginRight:"1em" }}>
-                <ListGroup >
+              <div style={{ marginLeft: '1em', marginRight: '1em' }}>
+                <ListGroup>
                   <Row>
-                  {myVideos.map((video, index) => (
-                    <div key={video.url} className="col-sm-4" style={{ marginBottom:'1em', height: "100px"}} onClick={() => setActiveVideo(video)}>
-                      <div className='card' style={{textAlign:"center", height:'100%', backgroundColor:video === activeVideo ? 'rgb(0,123,255)':'rgb(13,110,253,0.05)'}} action active={video === activeVideo}>{video.name}</div>
-                    </div>
-                  ))}
+                    {myVideos.map((video, index) => (
+                      <div key={video.url} className='col-sm-4' style={{ marginBottom: '1em', height: '100px' }} onClick={() => setActiveVideo(video)}>
+                        <div
+                          className='card'
+                          style={{ textAlign: 'center', height: '100%', backgroundColor: video === activeVideo ? 'rgb(0,123,255)' : 'rgb(13,110,253,0.05)' }}
+                          action
+                          active={video === activeVideo}
+                        >
+                          {video.name}
+                        </div>
+                      </div>
+                    ))}
                   </Row>
-                </ListGroup> 
+                </ListGroup>
               </div>
             </Card>
           </Col>
@@ -74,11 +84,12 @@ const StartingPageContent = () => {
               </Card.Body>
             </Card>
             <Card style={{ width: '18rem' }}>
-              <Card.Body style= {{display: 'flex' }}>
+              <Card.Body style={{ display: 'flex' }}>
                 <Card.Title>Difficulty</Card.Title>
-                <Card.Text style={{marginLeft: 20,width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty)}}></Card.Text>
+                <Card.Text style={{ marginLeft: 20, width: 20, height: 26, backgroundColor: getDifficulty(activeVideo.difficulty) }}></Card.Text>
               </Card.Body>
             </Card>
+            <HowToPlay shouldFloat={false}/>
           </Col>
         </Row>
       </Container>

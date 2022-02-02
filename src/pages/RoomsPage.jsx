@@ -1,5 +1,6 @@
 import { Spinner, Modal, Container, Row, Col, Button, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router'
+import HowToPlay from '../components/InstructionsComponent/HowToPlay'
 import { createRoom, useRooms } from '../utils/http'
 
 export const RoomsPage = () => {
@@ -44,6 +45,9 @@ export const RoomsPage = () => {
            <h3> Create room</h3>
           </Button>
         </Col>
+      </Row>
+      <Row style={{marginTop:'1%'}}>
+          <HowToPlay shouldFloat={true}/>
       </Row>
       <Row>
         {rooms.filter((room) => room.isOver === false).map((room, roomIndex) => {
